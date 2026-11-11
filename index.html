@@ -657,11 +657,7 @@ n2s(p, payload);
   <div class="q"><span class="qnum">C5</span>After patching to 1.0.1g the same script gets an Alert. In the fixed code, which two quantities are compared before the copy, and what does that comparison guarantee? Why are three lines enough to close the hole?<span class="tie">Ties to: the patch &amp; the source fix</span></div>
   <div class="q"><span class="qnum">C6</span>Imagine this had been a real production server you'd just patched. Is patching enough to consider the incident closed? If not, what else must be done, and <strong>why does the nature of this specific bug</strong> force those extra steps?<span class="tie">Ties to: what the leak could have contained</span></div>
 
-  <div class="alert alert-warning">
-    <h4>Instructor probe bank</h4>
-    <p>I may ask you <strong>any two</strong> of the following live (in class or a short call) to confirm the work is yours. Prepare them the same way &mdash; by understanding, not memorising.</p>
-  </div>
-
+  
   <div class="q probe"><span class="qnum">P1</span>The demo claims <code>0x4000</code> bytes, not the maximum <code>0xFFFF</code>. What sets the real upper bound on how much you can read in a single request?</div>
   <div class="q probe"><span class="qnum">P2</span>Why did exporting an environment variable fail to plant the secret where the over-read could reach it, while sending it in a TLS request worked? Where do OpenSSL's per-connection buffers actually live?</div>
   <div class="q probe"><span class="qnum">P3</span>Your target runs on a Docker <code>--internal</code> network. During exploit development, what specifically does that protect against &mdash; and what does it <strong>not</strong> protect against?</div>
