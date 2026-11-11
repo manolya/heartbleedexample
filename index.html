@@ -2,9 +2,9 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Heartbleed Lab</title>
 <style>
-  /* Layout: 2014 Bootstrap-3 flat style — centered container, jumbotron hero,
-     panels, alert boxes, light-grey pre blocks. Deliberately single (light) theme,
-     the way a real 2014 page looks. Hand-written since the CSP blocks CDN stylesheets. */
+  /* 2014 Bootstrap-3 flat style — centered container, panels, alert boxes,
+     light-grey pre blocks. Single light theme. Hand-written (CSP blocks CDN CSS).
+     Now hosts two views (Lab / Assignment) behind a top-level tab bar. */
   :root {
     --blue: #337ab7;
     --blue-dark: #23527c;
@@ -27,6 +27,11 @@
     font-size: 14px;
     line-height: 1.428571429;
   }
+  /* paint the phone safe-area strip above the sticky top bar */
+  body::before {
+    content: ""; position: fixed; inset: 0 0 auto;
+    height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 20;
+  }
   .container {
     max-width: 860px;
     margin: 0 auto;
@@ -37,6 +42,7 @@
   a { color: var(--blue); text-decoration: none; }
   a:hover, a:focus { color: var(--blue-dark); text-decoration: underline; }
   p { margin: 0 0 10px; }
+  strong { font-weight: 700; }
   h1,h2,h3,h4 { font-weight: 500; line-height: 1.1; color: inherit; }
   h1 { font-size: 36px; margin: 20px 0 10px; }
   h2 { font-size: 28px; margin: 20px 0 10px; }
@@ -44,74 +50,60 @@
   h4 { font-size: 16px; margin: 14px 0 6px; }
   small, .small { font-size: 85%; color: var(--muted); }
 
-  /* jumbotron */
-  .jumbotron {
-    background: #eeeeee;
-    padding: 34px 28px;
-    margin: 22px 0 22px;
-    border-radius: 6px;
+  /* ===== top-level section tab bar (Lab / Assignment) ===== */
+  .nav-top {
+    list-style: none; margin: 0 0 4px; padding: 14px 0 0;
+    display: flex; gap: 4px;
+    position: sticky; top: env(safe-area-inset-top, 0px);
+    background: var(--bg); z-index: 15; border-bottom: 2px solid #ccc;
   }
+  .nav-top li button {
+    font-family: inherit; font-size: 15px; font-weight: 700;
+    padding: 10px 20px; border: 1px solid transparent; border-bottom: none;
+    border-radius: 5px 5px 0 0; background: transparent; color: var(--blue);
+    cursor: pointer; margin-bottom: -2px;
+  }
+  .nav-top li button:hover { background: #f2f2f2; }
+  .nav-top li button[aria-selected="true"] {
+    color: var(--red); background: var(--bg);
+    border-color: #ccc #ccc var(--bg); border-bottom: 2px solid var(--bg);
+  }
+
+  /* jumbotron */
+  .jumbotron { background: #eeeeee; padding: 34px 28px; margin: 22px 0; border-radius: 6px; }
   .jumbotron h1 { font-size: 48px; margin-top: 0; }
   .jumbotron p { font-size: 18px; font-weight: 200; color: #444; margin-bottom: 14px; }
   .jumbotron .heart { color: var(--red); }
 
-  /* page-header (the hairline-underlined section titles) */
-  .page-header {
-    padding-bottom: 9px;
-    margin: 40px 0 20px;
-    border-bottom: 1px solid #eeeeee;
-  }
+  /* document header (assignment) */
+  .doc-head { border-bottom: 3px double #ccc; padding: 24px 0 16px; margin-bottom: 8px; }
+  .course-line { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+  .doc-head h1 { font-size: 34px; }
+  .doc-head h1 .heart { color: var(--red); }
+  .fillbar { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; font-size: 13px; color: #555; }
+  .fillbar span b { color: #222; }
+  .fillbar .blank { border-bottom: 1px solid #aaa; display: inline-block; min-width: 120px; }
+
+  /* page-header */
+  .page-header { padding-bottom: 9px; margin: 40px 0 20px; border-bottom: 1px solid #eeeeee; }
   .page-header h2 { margin: 0; }
   .page-header small { display: block; margin-top: 4px; font-size: 65%; }
 
   /* labels / badges */
-  .label {
-    display: inline-block;
-    padding: .2em .6em .3em;
-    font-size: 75%;
-    font-weight: 700;
-    line-height: 1;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: .25em;
-  }
-  .label-danger { background: var(--red); }
-  .label-info { background: #5bc0de; }
-  .label-warning { background: #f0ad4e; }
-  .label-success { background: #5cb85c; }
-  .label-default { background: #777; }
-
-  /* table of key facts under hero */
+  .label { display: inline-block; padding: .2em .6em .3em; font-size: 75%; font-weight: 700; line-height: 1; color: #fff; text-align: center; white-space: nowrap; vertical-align: baseline; border-radius: .25em; }
+  .label-danger { background: var(--red); } .label-info { background: #5bc0de; }
+  .label-warning { background: #f0ad4e; } .label-success { background: #5cb85c; } .label-default { background: #777; }
   .dl-row { margin: 0 0 18px; }
   .dl-row .label { margin-right: 6px; }
 
   /* panels */
-  .panel {
-    margin-bottom: 20px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.05);
-  }
-  .panel-heading {
-    padding: 10px 15px;
-    background: var(--panel-head);
-    border-bottom: 1px solid var(--border);
-    border-radius: 3px 3px 0 0;
-    font-weight: 600;
-  }
+  .panel { margin-bottom: 20px; background: #fff; border: 1px solid var(--border); border-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,.05); }
+  .panel-heading { padding: 10px 15px; background: var(--panel-head); border-bottom: 1px solid var(--border); border-radius: 3px 3px 0 0; font-weight: 600; }
   .panel-body { padding: 15px; }
   .panel-body > :last-child { margin-bottom: 0; }
 
   /* alert boxes */
-  .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-    border-radius: 4px;
-  }
+  .alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; }
   .alert h4 { margin-top: 0; color: inherit; }
   .alert-danger  { color: #a94442; background: #f2dede; border-color: #ebccd1; }
   .alert-info    { color: #31708f; background: #d9edf7; border-color: #bce8f1; }
@@ -119,33 +111,12 @@
   .alert-warning { color: #8a6d3b; background: #fcf8e3; border-color: #faebcc; }
   .alert code { background: rgba(0,0,0,.05); color: inherit; }
 
-  /* inline code — the classic pink-on-pink */
-  code {
-    padding: 2px 4px;
-    font-size: 90%;
-    color: #c7254e;
-    background: #f9f2f4;
-    border-radius: 4px;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-  }
+  /* inline code */
+  code { padding: 2px 4px; font-size: 90%; color: #c7254e; background: #f9f2f4; border-radius: 4px; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; }
 
   /* pre blocks */
   .pre-wrap { position: relative; margin: 0 0 18px; }
-  pre {
-    display: block;
-    padding: 12px;
-    margin: 0;
-    font-size: 13px;
-    line-height: 1.5;
-    color: #333;
-    word-break: normal;
-    background: var(--pre-bg);
-    border: 1px solid var(--pre-border);
-    border-radius: 4px;
-    overflow-x: auto;
-    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
-    tab-size: 2;
-  }
+  pre { display: block; padding: 12px; margin: 0; font-size: 13px; line-height: 1.5; color: #333; word-break: normal; background: var(--pre-bg); border: 1px solid var(--pre-border); border-radius: 4px; overflow-x: auto; font-family: Menlo, Monaco, Consolas, "Courier New", monospace; tab-size: 2; }
   pre code { padding: 0; font-size: inherit; color: inherit; background: transparent; border-radius: 0; white-space: pre; }
   pre .prompt { color: #999; user-select: none; }
   pre .cmt { color: #998; font-style: italic; }
@@ -155,99 +126,51 @@
   pre .evil { color: #c7254e; font-weight: 700; }
   pre .good { color: #3c763d; font-weight: 700; }
 
-  .pre-label {
-    font-family: Menlo, Monaco, Consolas, monospace;
-    font-size: 11px;
-    color: var(--muted);
-    background: #eaeaea;
-    border: 1px solid var(--pre-border);
-    border-bottom: none;
-    border-radius: 4px 4px 0 0;
-    padding: 4px 10px;
-    display: flex;
-    align-items: center;
-  }
+  .pre-label { font-family: Menlo, Monaco, Consolas, monospace; font-size: 11px; color: var(--muted); background: #eaeaea; border: 1px solid var(--pre-border); border-bottom: none; border-radius: 4px 4px 0 0; padding: 4px 10px; display: flex; align-items: center; }
   .pre-label + pre { border-radius: 0 0 4px 4px; }
-  .pre-label .btn-copy {
-    margin-left: auto;
-    font-family: inherit;
-    font-size: 11px;
-    line-height: 1.4;
-    color: #fff;
-    background: var(--blue);
-    border: 1px solid #2e6da4;
-    border-radius: 3px;
-    padding: 1px 8px;
-    cursor: pointer;
-  }
+  .pre-label .btn-copy { margin-left: auto; font-family: inherit; font-size: 11px; line-height: 1.4; color: #fff; background: var(--blue); border: 1px solid #2e6da4; border-radius: 3px; padding: 1px 8px; cursor: pointer; }
   .pre-label .btn-copy:hover { background: var(--blue-dark); }
   .pre-label .btn-copy.done { background: #5cb85c; border-color: #4cae4c; }
 
   /* diagram */
   .figure { text-align: center; margin: 18px 0; }
-  .figure .thumbnail {
-    display: block;
-    padding: 8px;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow-x: auto;
-  }
+  .figure .thumbnail { display: block; padding: 8px; background: #fff; border: 1px solid var(--border); border-radius: 4px; overflow-x: auto; }
   .figure svg { display: block; width: 100%; height: auto; min-width: 560px; }
   .figure .caption { font-size: 12px; color: var(--muted); margin-top: 6px; }
 
-  /* nav-tabs */
-  .nav-tabs {
-    list-style: none;
-    margin: 0 0 15px;
-    padding: 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-  }
-  .nav-tabs li button {
-    border: 1px solid transparent;
-    border-radius: 4px 4px 0 0;
-    padding: 8px 15px;
-    margin-bottom: -1px;
-    background: transparent;
-    color: var(--blue);
-    font-size: 14px;
-    cursor: pointer;
-    font-family: inherit;
-  }
+  /* nested nav-tabs (Docker / WSL) */
+  .nav-tabs { list-style: none; margin: 0 0 15px; padding: 0; border-bottom: 1px solid var(--border); display: flex; }
+  .nav-tabs li button { border: 1px solid transparent; border-radius: 4px 4px 0 0; padding: 8px 15px; margin-bottom: -1px; background: transparent; color: var(--blue); font-size: 14px; cursor: pointer; font-family: inherit; }
   .nav-tabs li button:hover { background: #eee; }
-  .nav-tabs li button[aria-selected="true"] {
-    color: #555;
-    cursor: default;
-    background: #fff;
-    border-color: var(--border) var(--border) #fff;
-  }
+  .nav-tabs li button[aria-selected="true"] { color: #555; cursor: default; background: #fff; border-color: var(--border) var(--border) #fff; }
 
-  /* packet anatomy table */
-  .table {
-    width: 100%;
-    max-width: 100%;
-    margin-bottom: 18px;
-    border-collapse: collapse;
-    font-size: 13px;
-  }
-  .table th, .table td {
-    padding: 8px;
-    border: 1px solid var(--border);
-    vertical-align: top;
-    text-align: left;
-  }
+  /* tables */
+  .table { width: 100%; max-width: 100%; margin-bottom: 18px; border-collapse: collapse; font-size: 13px; }
+  .table th, .table td { padding: 8px 10px; border: 1px solid var(--border); vertical-align: top; text-align: left; }
   .table th { background: var(--panel-head); font-weight: 600; }
   .table .mono { font-family: Menlo, Monaco, Consolas, monospace; white-space: nowrap; }
   .table tbody tr:nth-child(odd) td { background: #f9f9f9; }
   .table .evil-row td { background: #f2dede !important; }
+  .table td.w { white-space: nowrap; text-align: center; font-variant-numeric: tabular-nums; }
+  .table tfoot td { font-weight: 700; background: var(--panel-head); }
+
+  /* lists */
+  ol.tasks { padding-left: 22px; margin: 10px 0 18px; }
+  ol.tasks > li { margin-bottom: 10px; padding-left: 4px; }
+  ol.tasks > li::marker { font-weight: 700; color: var(--blue); }
+  ul.plain { padding-left: 20px; margin: 10px 0 18px; }
+  ul.plain li { margin-bottom: 7px; }
+
+  /* question cards */
+  .q { border: 1px solid var(--border); border-left: 4px solid var(--blue); border-radius: 4px; padding: 12px 14px; margin-bottom: 12px; background: #fff; }
+  .q .qnum { display: inline-block; font-weight: 700; color: var(--blue); font-family: Menlo, Monaco, Consolas, monospace; margin-right: 8px; }
+  .q .tie { display: block; margin-top: 6px; font-size: 12px; color: var(--muted); }
+  .q.probe { border-left-color: #f0ad4e; }
 
   /* checklist */
   ul.checklist { list-style: none; padding: 0; margin: 12px 0; }
-  ul.checklist li { padding: 6px 0 6px 26px; position: relative; border-bottom: 1px solid #eee; }
-  ul.checklist li:before {
-    content: "\2610"; position: absolute; left: 0; top: 5px; color: var(--blue); font-size: 16px;
-  }
+  ul.checklist li { padding: 7px 0 7px 28px; position: relative; border-bottom: 1px solid #eee; }
+  ul.checklist li:before { content: "\2610"; position: absolute; left: 0; top: 5px; color: var(--blue); font-size: 17px; }
 
   hr { border: 0; border-top: 1px solid #eee; margin: 24px 0; }
   .footer { color: var(--muted); font-size: 12px; margin-top: 10px; }
@@ -256,12 +179,23 @@
     .jumbotron h1 { font-size: 34px; }
     .jumbotron { padding: 22px 18px; }
     h1 { font-size: 28px; } h2 { font-size: 23px; }
+    .nav-top li button { padding: 9px 14px; font-size: 14px; }
   }
 </style>
 
 <div class="container">
 
-  <!-- ===== JUMBOTRON HERO ===== -->
+  <!-- ================= TOP-LEVEL SECTION TABS ================= -->
+  <ul class="nav-top" role="tablist" aria-label="Section" data-hash="true">
+    <li role="presentation"><button role="tab" id="top-lab" data-token="lab" aria-selected="true" aria-controls="view-lab">&#128225; Lab Worksheet</button></li>
+    <li role="presentation"><button role="tab" id="top-assignment" data-token="assignment" aria-selected="false" aria-controls="view-assignment">&#128203; Assignment</button></li>
+  </ul>
+
+  <!-- =========================================================== -->
+  <!-- ========================= LAB VIEW ======================== -->
+  <!-- =========================================================== -->
+  <div id="view-lab" role="tabpanel" aria-labelledby="top-lab">
+
   <div class="jumbotron">
     <h1>The <span class="heart">Heartbleed</span> Lab</h1>
     <p>Build a deliberately vulnerable TLS server inside an isolated container, then over-read its heap one heartbeat at a time &mdash; the real OpenSSL buffer over-read, reproduced on a machine that can only bleed into itself.</p>
@@ -274,16 +208,12 @@
     </div>
   </div>
 
-  <!-- ===== SAFETY ===== -->
   <div class="alert alert-danger">
     <h4>Containment is the whole point</h4>
     <p>Everything below runs against a server <strong>you</strong> built, bound to loopback inside a throwaway container. Do not point this tooling at any host you don't own. The vulnerable OpenSSL binary never leaves the sandbox &mdash; treat the container as radioactive and delete it when you're done.</p>
   </div>
 
-  <!-- ===== 00 MECHANISM ===== -->
-  <div class="page-header">
-    <h2>00 &middot; What actually bleeds <small>The mechanism</small></h2>
-  </div>
+  <div class="page-header"><h2>00 &middot; What actually bleeds <small>The mechanism</small></h2></div>
   <p>TLS has a keep-alive extension called the <strong>Heartbeat</strong> (RFC 6520). The client sends a small <code>HeartbeatRequest</code> carrying a payload and a number saying how long that payload is. The server is supposed to echo exactly those bytes back.</p>
   <p>The bug: vulnerable OpenSSL <strong>trusts the length field and never checks it against the bytes actually received.</strong> You send a request whose payload is empty but whose length field claims 65535, and the server allocates a 65535-byte response buffer and <code>memcpy</code>s 65535 bytes starting at your (missing) payload &mdash; reading ~64 KB of whatever sat next to it on the heap. Private keys, session cookies, POSTed passwords, decrypted traffic. Then it mails that heap slice back to you.</p>
 
@@ -294,11 +224,9 @@
         <text x="83" y="41" text-anchor="middle" font-size="13" fill="#333" font-weight="700">ATTACKER</text>
         <rect x="422" y="16" width="150" height="40" rx="4" fill="#eeeeee" stroke="#ccc"/>
         <text x="497" y="41" text-anchor="middle" font-size="13" fill="#333" font-weight="700">VULN SERVER</text>
-
         <line x1="160" y1="90" x2="420" y2="90" stroke="#d9534f" stroke-width="2" marker-end="url(#ar)"/>
         <rect x="178" y="66" width="224" height="20" rx="3" fill="#f2dede" stroke="#ebccd1"/>
         <text x="290" y="80" text-anchor="middle" font-size="11" fill="#a94442" font-weight="700">type=1  len=65535  payload=(empty)</text>
-
         <text x="497" y="118" text-anchor="middle" font-size="10.5" fill="#777">server heap</text>
         <rect x="432" y="124" width="24" height="26" fill="#f2dede" stroke="#d9534f"/>
         <text x="444" y="141" text-anchor="middle" font-size="9" fill="#a94442">hb</text>
@@ -306,15 +234,12 @@
         <text x="514" y="141" text-anchor="middle" font-size="9.5" fill="#777">adjacent memory &#8594;&#8594;&#8594;</text>
         <path d="M444 150 L444 164 L560 164 L560 150" fill="none" stroke="#d9534f" stroke-width="1.5" stroke-dasharray="3 2"/>
         <text x="502" y="178" text-anchor="middle" font-size="9.5" fill="#a94442">memcpy reads 65535 bytes from here</text>
-
         <line x1="420" y1="214" x2="160" y2="214" stroke="#333" stroke-width="2" marker-end="url(#ar2)"/>
         <rect x="150" y="190" width="260" height="20" rx="3" fill="#eeeeee" stroke="#ccc"/>
         <text x="280" y="204" text-anchor="middle" font-size="10.5" fill="#333">response: ~65535 leaked heap bytes</text>
-
         <text x="83" y="250" text-anchor="middle" font-size="10.5" fill="#a94442" font-weight="700">&#8595; keys &middot; cookies &middot; passwords</text>
         <rect x="8" y="258" width="150" height="30" rx="4" fill="#f2dede" stroke="#d9534f"/>
         <text x="83" y="278" text-anchor="middle" font-size="11" fill="#a94442" font-weight="700">attacker reads secrets</text>
-
         <defs>
           <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#d9534f"/></marker>
           <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#333"/></marker>
@@ -326,10 +251,7 @@
 
   <p>The fix in 1.0.1g is almost insultingly small: before echoing, check that <code>1 + 2 + payload_length + 16 &le; record_length</code>. If the claimed length doesn't fit in the record that arrived, silently drop it. Three lines.</p>
 
-  <!-- ===== 01 SETUP ===== -->
-  <div class="page-header">
-    <h2>01 &middot; Build the isolated range <small>Setup &mdash; pick your sandbox</small></h2>
-  </div>
+  <div class="page-header"><h2>01 &middot; Build the isolated range <small>Setup &mdash; pick your sandbox</small></h2></div>
   <p>You need a Linux userland running an OpenSSL from the vulnerable window (1.0.1 &ndash; 1.0.1f). Modern distros ship patched OpenSSL, so the cleanest approach is a pinned old base image. Both paths below give you a self-contained target; Docker is more hermetic, WSL2 is fine if that's what you have.</p>
 
   <ul class="nav-tabs" role="tablist" aria-label="Environment">
@@ -436,11 +358,8 @@ exec $OPENSSL s_server -key /srv/key.pem -cert /srv/cert.pem \
     <div class="alert alert-success"><strong>Loopback-bound.</strong> Binding to <code>127.0.0.1</code> instead of <code>0.0.0.0</code> means only processes inside this WSL instance can connect. Your victim and attacker run in the same WSL, in separate terminals. On WSL, use <code>127.0.0.1</code> wherever the Docker steps say <code>target</code>.</div>
   </div>
 
-  <!-- ===== 02 RECON ===== -->
-  <div class="page-header">
-    <h2>02 &middot; Confirm the heartbeat is open <small>Reconnaissance</small></h2>
-  </div>
-  <p>Before firing the exploit, confirm the server actually advertises the heartbeat extension. The vulnerable OpenSSL's own <code>s_client</code> can do a legitimate heartbeat, and a TLS handshake dump shows the extension in the <code>ServerHello</code>.</p>
+  <div class="page-header"><h2>02 &middot; Confirm the heartbeat is open <small>Reconnaissance</small></h2></div>
+  <p>Before firing the exploit, confirm the server advertises the heartbeat extension. The vulnerable OpenSSL's own <code>s_client</code> can do a legitimate heartbeat, and a TLS handshake dump shows the extension in the <code>ServerHello</code>.</p>
   <div class="pre-wrap">
     <div class="pre-label">bash &mdash; attacker container / 2nd WSL terminal <button class="btn-copy">copy</button></div>
 <pre><code><span class="cmt"># from an attacker container on hb-net:</span>
@@ -455,10 +374,7 @@ exec $OPENSSL s_server -key /srv/key.pem -cert /srv/cert.pem \
   </div>
   <div class="alert alert-info"><strong>What you just proved:</strong> the server speaks the heartbeat extension. A patched 1.0.1g server would still answer a <em>well-formed</em> heartbeat &mdash; the difference only shows when you lie about the length, which is the next step.</div>
 
-  <!-- ===== 03 EXPLOIT ===== -->
-  <div class="page-header">
-    <h2>03 &middot; Craft the malformed heartbeat <small>Exploitation</small></h2>
-  </div>
+  <div class="page-header"><h2>03 &middot; Craft the malformed heartbeat <small>Exploitation</small></h2></div>
   <p>This is the heart of it. We send a <code>HeartbeatRequest</code> by hand <strong>part-way through the TLS handshake &mdash; before it completes.</strong> Heartbleed needs no key exchange, no <code>Finished</code>, and no authentication: that's a big part of why it was so dangerous. The one lie is in the length field: <strong>payload_length declares 0x4000 (16384) bytes, but the request carries no payload at all.</strong> The record is only 3 bytes long &mdash; just enough for the type byte and the 2-byte length field.</p>
 
   <table class="table">
@@ -550,7 +466,7 @@ typ, ver, leak = recv_record(s)
 <span class="k">else</span>:
     print(<span class="s">'[-] unexpected record type %r'</span> % typ)</code></pre>
   </div>
-  <div class="alert alert-info"><strong>The two bytes that matter</strong> are the only interesting part of the heartbeat: <code>01</code> (this is a request) and <code>40 00</code> (claimed length 16384). Everything in the ClientHello is boilerplate that just gets you to a point where the server will accept a heartbeat; you can equally let the vulnerable <code>s_client</code> do the handshake and only hand-craft these three bytes.</div>
+  <div class="alert alert-info"><strong>The two bytes that matter</strong> are the only interesting part of the heartbeat: <code>01</code> (this is a request) and <code>40 00</code> (claimed length 16384). Everything in the ClientHello is boilerplate that just gets the server to accept a heartbeat; you can equally let the vulnerable <code>s_client</code> do the handshake and only hand-craft these three bytes.</div>
 
   <h3>3.1 &mdash; Prime the heap with a victim's secret</h3>
   <p>Now the correction that matters for a working demo. <strong>A single memory read only leaks what happens to be on the heap right now</strong> &mdash; and exporting an environment variable before launching <code>s_server</code> puts the secret in the process environment and on the stack, nowhere near the <code>OPENSSL_malloc</code>'d TLS buffers the heartbeat handler over-reads. To make the secret appear, it has to travel <em>through</em> the TLS channel, where it lands in exactly those heap buffers.</p>
@@ -583,10 +499,7 @@ typ, ver, leak = recv_record(s)
   </div>
   <div class="alert alert-success"><strong>There it is.</strong> You sent an empty payload and the server handed back 16 KB of its own heap &mdash; including the <code>SESSIONSECRET</code> cookie a victim just sent. It won't appear on every single read; fire repeatedly while the victim loop runs and you'll catch it as the heap churns. This is exactly how real attackers walked server memory to pull private keys and live session cookies.</div>
 
-  <!-- ===== 04 HARVEST ===== -->
-  <div class="page-header">
-    <h2>04 &middot; Walk the heap &amp; hunt for secrets <small>Post-exploitation</small></h2>
-  </div>
+  <div class="page-header"><h2>04 &middot; Walk the heap &amp; hunt for secrets <small>Post-exploitation</small></h2></div>
   <p>A single 16 KB read is a snapshot. The real technique is to <strong>loop</strong> &mdash; keep the victim running, collect leaks over many requests, and grep the aggregate for high-value patterns: cookie headers, HTTP Basic auth, the start of an RSA private key.</p>
   <div class="pre-wrap">
     <div class="pre-label">bash &mdash; attacker <button class="btn-copy">copy</button></div>
@@ -604,10 +517,7 @@ typ, ver, leak = recv_record(s)
     </tbody>
   </table>
 
-  <!-- ===== 05 PATCH ===== -->
-  <div class="page-header">
-    <h2>05 &middot; Patch it and watch the bleed stop <small>Remediation &mdash; the other half of the lab</small></h2>
-  </div>
+  <div class="page-header"><h2>05 &middot; Patch it and watch the bleed stop <small>Remediation &mdash; the other half of the lab</small></h2></div>
   <p>The exercise isn't complete until you've closed it. Rebuild the exact same server against <strong>OpenSSL 1.0.1g</strong> (change one line in the Dockerfile) and run your identical exploit script.</p>
   <div class="pre-wrap">
     <div class="pre-label">Dockerfile &mdash; one-line change <button class="btn-copy">copy</button></div>
@@ -635,10 +545,7 @@ n2s(p, payload);
     <span class="k">return</span> 0; <span class="cmt">/* payload must fit the record — THIS is the patch */</span></code></pre>
   </div>
 
-  <!-- ===== 06 CLEANUP ===== -->
-  <div class="page-header">
-    <h2>06 &middot; Burn the range down <small>Teardown</small></h2>
-  </div>
+  <div class="page-header"><h2>06 &middot; Burn the range down <small>Teardown</small></h2></div>
   <p>You just compiled a known-exploitable crypto library. Don't leave it lying around.</p>
   <div class="pre-wrap">
     <div class="pre-label">bash &mdash; host <button class="btn-copy">copy</button></div>
@@ -660,20 +567,176 @@ n2s(p, payload);
     <p>References: RFC 6520 (Heartbeat Extension) &middot; the OpenSSL 1.0.1g changelog &middot; heartbleed.com for the original disclosure writeup.</p>
   </div>
 
+  </div><!-- /view-lab -->
+
+  <!-- =========================================================== -->
+  <!-- ====================== ASSIGNMENT VIEW ==================== -->
+  <!-- =========================================================== -->
+  <div id="view-assignment" role="tabpanel" aria-labelledby="top-assignment" hidden>
+
+  <div class="doc-head">
+    <div class="course-line">Network Security &middot; CSE 425 &mdash; Lab Assignment</div>
+    <h1>Assignment: Reproduce &amp; Defend <span class="heart">Heartbleed</span></h1>
+    <p class="small">A hands-on lab with a recorded oral defense. Perform the attack on the <strong>Lab Worksheet</strong> tab, then record the video described here.</p>
+    <div class="fillbar">
+      <span><b>Weight:</b> [__]% of course grade</span>
+      <span><b>Due:</b> <span class="blank">&nbsp;</span></span>
+      <span><b>Submit to:</b> <span class="blank">&nbsp;</span></span>
+      <span><b>Mode:</b> Individual</span>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <h4>What this assignment is</h4>
+    <p>You will build the isolated vulnerable server from the <strong>Lab Worksheet</strong> tab, carry out the Heartbleed over-read against <strong>your own</strong> container, patch it, and tear it down &mdash; then record a short video in which <strong>you narrate what you are doing and answer a set of questions on camera.</strong> The questions are <strong>not</strong> written on the worksheet. They can't be answered by reading or pasting; they can only be answered if you actually ran the lab and understood why each step behaves the way it does.</p>
+  </div>
+
+  <div class="alert alert-danger">
+    <h4>Scope &amp; conduct</h4>
+    <p>Everything happens inside the throwaway container/VM you build. You may <strong>only</strong> target the lab server you created. Pointing any of this tooling at a machine you don't own is out of scope for this assignment and against university policy and the law. Delete the vulnerable build when you finish (Part 4 / worksheet step 06).</p>
+  </div>
+
+  <div class="page-header"><h2>Learning outcomes <small>What a passing submission demonstrates</small></h2></div>
+  <ul class="plain">
+    <li>You can stand up an intentionally vulnerable service in a contained environment and reason about the containment.</li>
+    <li>You understand the Heartbleed mechanism at the byte level &mdash; record length vs. payload length, and why the over-read happens.</li>
+    <li>You can connect an exploit's behaviour to a threat model (what it needs, what would and wouldn't have stopped it).</li>
+    <li>You can verify a fix and explain why it works, and reason about what patching alone does <em>not</em> fix.</li>
+  </ul>
+
+  <div class="page-header"><h2>Part 1 &middot; Perform the lab <small>Follow the worksheet; capture evidence as you go</small></h2></div>
+  <p>Work through the <strong>Lab Worksheet</strong> tab end to end. As you go, keep everything on screen &mdash; you'll be recording it in Part 3. You must produce and capture each of these:</p>
+  <ul class="checklist">
+    <li><code>openssl version</code> inside your target showing <strong>OpenSSL 1.0.1f</strong> (or another version in the vulnerable range).</li>
+    <li>The recon step proving the server advertises the <strong>heartbeat</strong> extension.</li>
+    <li>Your <strong>victim loop</strong> running (the client that sends a secret over TLS).</li>
+    <li>A successful run of <code>heartbleed.py</code> whose hexdump contains the victim's secret &mdash; this is your <strong>captured leak</strong>.</li>
+    <li>The same script run against the <strong>1.0.1g</strong> rebuild, returning an Alert (patched).</li>
+    <li>The teardown commands removing the container, image, and network.</li>
+  </ul>
+  <div class="alert alert-warning"><strong>Pick your own secret.</strong> Do not use the <code>the_cake_is_a_lie_42</code> string from the worksheet. Set your victim's cookie to <code>SESSIONSECRET=&lt;your-student-id&gt;-&lt;a-random-word&gt;</code> so your captured leak is provably yours and not copied from a classmate. Say your chosen secret out loud at the start of the video.</div>
+
+  <div class="page-header"><h2>Part 2 &middot; Collect your artifacts <small>Submit alongside the video</small></h2></div>
+  <ul class="plain">
+    <li><strong><code>bleed.log</code></strong> &mdash; the aggregated output of ~50 exploit runs (worksheet step 04).</li>
+    <li><strong><code>leak_excerpt.txt</code></strong> &mdash; the single hexdump block from your log that shows your chosen secret, nothing else.</li>
+    <li><strong>The video</strong> (Part 3).</li>
+  </ul>
+  <p class="small">Name files <code>surname_studentid_heartbleed.&lt;ext&gt;</code>.</p>
+
+  <div class="page-header"><h2>Part 3 &middot; Record the video <small>8&ndash;12 minutes</small></h2></div>
+  <div class="panel">
+    <div class="panel-heading">Recording requirements</div>
+    <div class="panel-body">
+      <ul class="plain">
+        <li><strong>Your face and voice.</strong> Webcam on at least during the intro and the Q&amp;A at the end; your screen shared throughout. We need to see it's you and hear you reason in your own words.</li>
+        <li><strong>Narrate as you go.</strong> Don't perform in silence and talk over it later &mdash; think out loud while the commands run.</li>
+        <li><strong>One take, no cuts in the demo section.</strong> The exploit &rarr; patch &rarr; teardown sequence must be continuous and unedited so the live behaviour is visible.</li>
+        <li>Format: MP4 (H.264) or equivalent, audible audio, 720p or better. Target 8&ndash;12 min; hard cap 15.</li>
+      </ul>
+    </div>
+  </div>
+  <p><strong>Shot list &mdash; cover these in order:</strong></p>
+  <ol class="tasks">
+    <li>On camera: your name, student ID, today's date, and the secret string you chose.</li>
+    <li>Show <code>openssl version</code> on the target and name the vulnerable range.</li>
+    <li>Recon: show the heartbeat extension is present; say what you'd expect from a patched server here.</li>
+    <li>Start the victim loop; explain in one sentence what it's doing and why it matters.</li>
+    <li>Run the exploit. When the leak appears, <strong>point to your secret in the hexdump</strong> and read it aloud.</li>
+    <li>Rebuild against 1.0.1g, run the same script, show the Alert.</li>
+    <li>Run teardown.</li>
+    <li>Answer the Part 4 questions to camera.</li>
+  </ol>
+
+  <div class="page-header"><h2>Part 4 &middot; Answer on camera <small>Not on the worksheet &mdash; reason it out</small></h2></div>
+  <p>Answer <strong>all six</strong> core questions in the video, in your own words. They're deliberately absent from the worksheet: each one is answerable only by having run the lab and understood why it behaved as it did. Keep each answer to roughly a minute.</p>
+
+  <div class="q"><span class="qnum">C1</span>Point to one line in <em>your</em> leaked hexdump that is <strong>not</strong> your secret. What is that data, which part of the server's memory did it come from, and why was it sitting there?<span class="tie">Ties to: running the exploit &amp; reading the dump</span></div>
+  <div class="q"><span class="qnum">C2</span>You sent a payload of <strong>zero bytes</strong> and got roughly 16 KB back. Explain, using the two length values in the request, exactly why the server returned far more than you sent. Which length did it trust, and which did it ignore?<span class="tie">Ties to: the malformed heartbeat</span></div>
+  <div class="q"><span class="qnum">C3</span>Your secret did <strong>not</strong> appear in every single read. Explain why, and name one concrete thing you could change to improve your odds of capturing it on a given request.<span class="tie">Ties to: the victim loop &amp; heap behaviour</span></div>
+  <div class="q"><span class="qnum">C4</span>You fired the heartbeat <strong>before the TLS handshake completed</strong>. What does that fact tell you about whether requiring client authentication, or a valid login, would have stopped this attack?<span class="tie">Ties to: where in the handshake you fired</span></div>
+  <div class="q"><span class="qnum">C5</span>After patching to 1.0.1g the same script gets an Alert. In the fixed code, which two quantities are compared before the copy, and what does that comparison guarantee? Why are three lines enough to close the hole?<span class="tie">Ties to: the patch &amp; the source fix</span></div>
+  <div class="q"><span class="qnum">C6</span>Imagine this had been a real production server you'd just patched. Is patching enough to consider the incident closed? If not, what else must be done, and <strong>why does the nature of this specific bug</strong> force those extra steps?<span class="tie">Ties to: what the leak could have contained</span></div>
+
+  <div class="alert alert-warning">
+    <h4>Instructor probe bank</h4>
+    <p>I may ask you <strong>any two</strong> of the following live (in class or a short call) to confirm the work is yours. Prepare them the same way &mdash; by understanding, not memorising.</p>
+  </div>
+
+  <div class="q probe"><span class="qnum">P1</span>The demo claims <code>0x4000</code> bytes, not the maximum <code>0xFFFF</code>. What sets the real upper bound on how much you can read in a single request?</div>
+  <div class="q probe"><span class="qnum">P2</span>Why did exporting an environment variable fail to plant the secret where the over-read could reach it, while sending it in a TLS request worked? Where do OpenSSL's per-connection buffers actually live?</div>
+  <div class="q probe"><span class="qnum">P3</span>Your target runs on a Docker <code>--internal</code> network. During exploit development, what specifically does that protect against &mdash; and what does it <strong>not</strong> protect against?</div>
+  <div class="q probe"><span class="qnum">P4</span>Heartbeat requests don't appear in the server's logs by default. If you were defending a real fleet, what telemetry or detection would you add to catch this being exploited?</div>
+  <div class="q probe"><span class="qnum">P5</span>If enough reads surfaced the server's RSA key material, sketch how a private key could be reconstructed, and explain why that material is resident in memory at all.</div>
+  <div class="q probe"><span class="qnum">P6</span>Draw the three bytes <code>01 40 00</code> and label each. What is the difference between the TLS <em>record</em> length and the heartbeat <em>payload</em> length, and which one does the patch check against?</div>
+  <div class="q probe"><span class="qnum">P7</span>The PoC waits for <code>ServerHelloDone</code> before firing. What assumption about how the server packs its handshake does that rely on, and how could it break?</div>
+  <div class="q probe"><span class="qnum">P8</span>Estimate: your secret is ~40 bytes and a read returns a 16 KB window. Assuming it's placed roughly uniformly, about how many requests would you expect to need for a good chance of catching it? Show your reasoning, not a memorised number.</div>
+
+  <div class="page-header"><h2>Grading <small>100 points</small></h2></div>
+  <table class="table">
+    <thead><tr><th>Criterion</th><th>What earns full marks</th><th class="w">Pts</th></tr></thead>
+    <tbody>
+      <tr><td>Live leak demonstrated</td><td>Your chosen secret visibly captured in an unedited run, on camera</td><td class="w">25</td></tr>
+      <tr><td>Narration &amp; mechanism</td><td>You explain each stage correctly while doing it, not after</td><td class="w">20</td></tr>
+      <tr><td>Core questions (C1&ndash;C6)</td><td>All six answered correctly, in your own words, with reasoning</td><td class="w">30</td></tr>
+      <tr><td>Patch verification</td><td>1.0.1g rebuild shown returning an Alert, and correctly explained</td><td class="w">10</td></tr>
+      <tr><td>Containment &amp; cleanup</td><td>Isolation reasoned about; teardown shown</td><td class="w">5</td></tr>
+      <tr><td>Presence &amp; authenticity</td><td>Face + voice; clearly your own work and your own secret</td><td class="w">10</td></tr>
+    </tbody>
+    <tfoot><tr><td colspan="2">Total</td><td class="w">100</td></tr></tfoot>
+  </table>
+
+  <div class="alert alert-danger">
+    <h4>Academic integrity</h4>
+    <p>Individual work. Your captured secret must contain your student ID, so copied leaks are self-evident. Answers must be in your own voice and words &mdash; reading a prepared script verbatim, or answers that match another student's phrasing, will trigger a live viva from the probe bank. Using the tooling against anything other than your own lab container is an automatic fail and a conduct referral.</p>
+  </div>
+
+  <hr>
+  <div class="footer">
+    <p>CSE 425 Network Security &middot; Heartbleed lab assignment. Pairs with the <strong>Lab Worksheet</strong> tab (CVE-2014-0160). Bracketed fields <span class="blank">&nbsp;</span> are for the instructor to complete before handout.</p>
+  </div>
+
+  </div><!-- /view-assignment -->
+
 </div>
 
 <script>
-  var tabs = document.querySelectorAll('[role="tab"]');
-  for (var i = 0; i < tabs.length; i++) {
-    tabs[i].addEventListener('click', function (e) {
-      for (var j = 0; j < tabs.length; j++) {
-        var sel = tabs[j] === e.currentTarget;
-        tabs[j].setAttribute('aria-selected', sel);
-        document.getElementById(tabs[j].getAttribute('aria-controls')).hidden = !sel;
+  // Scoped tablists: each [role=tablist] controls only its own tabs/panels,
+  // so the top-level Lab/Assignment tabs and the nested Docker/WSL tabs
+  // don't interfere. Top bar also reflects the view in location.hash.
+  var lists = document.querySelectorAll('[role="tablist"]');
+  for (var li = 0; li < lists.length; li++) {
+    (function (list) {
+      var tabs = list.querySelectorAll('[role="tab"]');
+      var usesHash = list.getAttribute('data-hash') === 'true';
+      for (var i = 0; i < tabs.length; i++) {
+        tabs[i].addEventListener('click', function (e) {
+          var clicked = e.currentTarget;
+          for (var j = 0; j < tabs.length; j++) {
+            var sel = tabs[j] === clicked;
+            tabs[j].setAttribute('aria-selected', sel);
+            var panel = document.getElementById(tabs[j].getAttribute('aria-controls'));
+            if (panel) panel.hidden = !sel;
+          }
+          if (usesHash) {
+            try { history.replaceState(null, '', '#' + clicked.getAttribute('data-token')); } catch (err) {}
+            try { window.scrollTo(0, 0); } catch (err) {}
+          }
+        });
       }
-    });
+    })(lists[li]);
   }
 
+  // Open the view named in the URL hash (#lab / #assignment) on load.
+  (function () {
+    var h = (location.hash || '').replace('#', '');
+    if (h === 'assignment') {
+      var b = document.getElementById('top-assignment');
+      if (b) b.click();
+    }
+  })();
+
+  // Copy buttons on terminal blocks.
   var btns = document.querySelectorAll('.btn-copy');
   for (var k = 0; k < btns.length; k++) {
     btns[k].addEventListener('click', function (e) {
